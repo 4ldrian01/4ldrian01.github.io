@@ -18,6 +18,9 @@ desktop.ini
 .classpath
 .settings/
 
+# Ignore deployment and configuration files used only locally
+DEPLOYMENT_CHECKLIST.md
+
 # Logs
 logs/
 *.log
