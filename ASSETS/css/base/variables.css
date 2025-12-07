@@ -1,0 +1,115 @@
+/* ============================================
+   CSS VARIABLES - Design Tokens
+   ============================================ */
+
+:root {
+    /* -------------------- Colors -------------------- */
+    --primary-color: #ff3333;
+    --primary-color-rgb: 255, 51, 51;
+    --secondary-color: #0f1115;
+    --background-color: #181a1f;
+    
+    /* Hero Circle - Soft, theme-aware accent (cool to balance red) */
+    --hero-circle-color: rgba(90, 152, 255, 0.08);
+    --hero-circle-glow: rgba(90, 152, 255, 0.14);
+    
+    /* Text Colors */
+    --text-color: #e9edf2;
+    --text-secondary: #c7cdd8;
+    
+    /* Accent Colors */
+    --accent-color: rgba(255, 51, 51, 0.82);
+    --accent-hover: rgba(255, 51, 51, 0.9);
+    --gradient-start: #ff3366;
+    --gradient-end: #00d4ff;
+    
+    /* Status Colors */
+    --error-color: #ff4444;
+    --success-color: #e9edf2;
+    --warning-color: #ffc107;
+
+    /* Third Color Accent (Technical Skills) */
+    --green-accent: #e9edf2;
+    --green-accent-rgb: 233, 237, 242;
+    --green-accent-hover: #c7cdd8;
+    --green-accent-light: rgba(233, 237, 242, 0.15);
+    --green-accent-border: rgba(233, 237, 242, 0.3);
+
+    /* Card & UI Colors */
+    --card-bg: linear-gradient(145deg, #20242c, #14171d);
+    --card-border: rgba(255, 51, 51, 0.06);
+    --shadow-color: rgba(0, 0, 0, 0.35);
+    --toggle-bg: #232730;
+    --toggle-border: #3a404d;
+
+    /* -------------------- Spacing -------------------- */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+    --spacing-3xl: 4rem;
+
+    /* -------------------- Layout -------------------- */
+    --container-width: min(90%, 1200px);
+    --header-height: clamp(60px, 8vh, 80px);
+    
+    /* -------------------- Breakpoints -------------------- */
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1280px;
+    --breakpoint-2xl: 1536px;
+
+    /* -------------------- Transitions -------------------- */
+    --transition-speed: 0.3s;
+    --transition-fast: 0.15s;
+    --transition-slow: 0.5s;
+    --transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* -------------------- Border Radius -------------------- */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-2xl: 20px;
+    --radius-full: 50%;
+
+    /* -------------------- Shadows -------------------- */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.2);
+    --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.25);
+    
+    /* Softer Modern Shadows */
+    --shadow-soft-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-soft-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-soft-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
+    --shadow-soft-xl: 0 12px 40px rgba(0, 0, 0, 0.12);
+    --shadow-elevated: 0 10px 40px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+
+    /* -------------------- Z-Index -------------------- */
+    --z-dropdown: 100;
+    --z-sticky: 500;
+    --z-fixed: 900;
+    --z-modal-backdrop: 1000;
+    --z-modal: 1001;
+    --z-tooltip: 1100;
+}
+
+/* -------------------- Dark Mode Adaptive Colors -------------------- */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --hero-circle-color: rgba(96, 160, 255, 0.06);
+        --hero-circle-glow: rgba(96, 160, 255, 0.10);
+    }
+}
+
+/* -------------------- Light Mode Support -------------------- */
+@media (prefers-color-scheme: light) {
+    :root {
+        --hero-circle-color: rgba(3, 102, 214, 0.12);
+        --hero-circle-glow: rgba(3, 102, 214, 0.18);
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "name": "Aldrian Muksan Sahid Portfolio",
+    "short_name": "Aldrian Portfolio",
+    "description": "Portfolio of Aldrian Muksan Sahid - IT Student & Aspiring Network Engineer, Developer, System Administrator",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#181a1f",
+    "theme_color": "#ff3333",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "images/letter-a.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "images/letter-a.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "categories": ["portfolio", "personal", "technology"],
+    "lang": "en",
+    "dir": "ltr"
+}

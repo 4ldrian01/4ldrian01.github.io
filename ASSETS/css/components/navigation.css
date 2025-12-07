@@ -1,0 +1,123 @@
+/* ============================================
+   NAVIGATION - Desktop Navigation Styles
+   ============================================ */
+
+/* Navigation Container */
+nav {
+    margin-left: auto;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 1.35rem;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+}
+
+nav ul li {
+    margin: 0;
+}
+
+/* Navigation Links */
+nav ul li a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    position: relative;
+    padding: 9px 6px;
+    transition: color var(--transition-speed) ease;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+}
+
+/* Focus-visible styles for keyboard navigation */
+nav ul li a:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 4px;
+    color: var(--primary-color);
+}
+
+/* Underline Animation */
+nav ul li a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width var(--transition-speed) ease;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    color: var(--primary-color);
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
+    width: 100%;
+}
+
+/* Green accent variant for skills-related nav */
+nav ul li a[href="#skills"].active {
+    color: var(--green-accent);
+}
+
+nav ul li a[href="#skills"].active::after {
+    background-color: var(--green-accent);
+}
+
+/* -------------------- Social Links -------------------- */
+.hero-social-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.hero-social-links a {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.hero-social-links a:hover {
+    color: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+/* Contact Social Links */
+.social-links {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.social-links a {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255, 68, 68, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: var(--primary-color);
+    transform: translateY(-3px);
+}
+
+/* Green accent variant for social links */
+.social-links a.green-hover:hover {
+    background: var(--green-accent);
+    color: #1a1a1a;
+}

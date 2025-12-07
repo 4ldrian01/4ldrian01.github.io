@@ -1,0 +1,186 @@
+/* ============================================
+   HOVER STABILITY - Prevent Cursor Flickering
+   ============================================
+   This file uses padding/margin techniques instead of
+   pseudo-elements to avoid conflicts with button shine effects.
+   
+   Solutions applied:
+   1. Extra padding on interactive elements
+   2. Negative margins to compensate for padding
+   3. Pointer-events management
+   4. Will-change for smoother transforms
+   ============================================ */
+
+/* ==========================================
+   GLOBAL HOVER STABILITY
+   ========================================== */
+
+/* Ensure smooth transforms don't cause repaints */
+.btn-primary,
+.btn-secondary,
+.category-btn,
+.project-link,
+.skill-card,
+.project-card,
+.cert-card,
+.stat-item,
+.contact-item,
+.interest-item,
+.theme-toggle,
+.cert-nav-btn,
+.soft-skill-chip {
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+
+/* ==========================================
+   BUTTON HOVER STABILITY
+   ========================================== */
+
+/* Buttons already have good padding, just ensure smooth transforms */
+.btn-primary,
+.btn-secondary,
+.category-btn,
+.project-link {
+    transform-origin: center center;
+}
+
+
+/* ==========================================
+   CARD HOVER STABILITY
+   ========================================== */
+
+/* Cards - use transform origin to keep cursor in bounds */
+.skill-card,
+.project-card,
+.cert-card {
+    transform-origin: center bottom;
+}
+
+/* Stat Item */
+.stat-item {
+    transform-origin: center center;
+}
+
+
+/* ==========================================
+   SOCIAL LINKS HOVER STABILITY
+   ========================================== */
+
+/* Social links - extend hit area with padding */
+.hero-social-links a,
+.social-links a,
+.footer-social a {
+    /* Links already have good hit areas, just ensure smooth transform */
+    transform-origin: center center;
+}
+
+
+/* ==========================================
+   NAVIGATION HOVER STABILITY
+   ========================================== */
+
+/* Desktop Nav Links - ensure good click area */
+nav ul li a {
+    display: inline-block;
+    padding: 10px 6px;
+}
+
+
+/* ==========================================
+   THEME TOGGLE HOVER STABILITY
+   ========================================== */
+
+.theme-toggle {
+    transform-origin: center center;
+}
+
+
+/* ==========================================
+   CERTIFICATION NAV BUTTONS STABILITY
+   ========================================== */
+
+.cert-nav-btn {
+    transform-origin: center center;
+}
+
+
+/* ==========================================
+   CONTACT ITEM HOVER STABILITY
+   ========================================== */
+
+.contact-item {
+    transform-origin: center center;
+}
+
+
+/* ==========================================
+   INTEREST ITEM HOVER STABILITY  
+   ========================================== */
+
+.interest-item {
+    transform-origin: center center;
+}
+
+
+/* ==========================================
+   SOFT SKILL CHIPS HOVER STABILITY
+   ========================================== */
+
+.soft-skill-chip {
+    transform-origin: center center;
+}
+
+
+/* ==========================================
+   REDUCED MOTION - Disable movement effects
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .btn-primary:hover,
+    .btn-secondary:hover,
+    .category-btn:hover,
+    .project-link:hover,
+    .skill-card:hover,
+    .project-card:hover,
+    .cert-card:hover,
+    .stat-item:hover,
+    .hero-social-links a:hover,
+    .social-links a:hover,
+    .footer-social a:hover,
+    .interest-item:hover,
+    .contact-item:hover,
+    .theme-toggle:hover {
+        transform: none !important;
+    }
+}
+
+
+/* ==========================================
+   CURSOR POINTER CONSISTENCY
+   ========================================== */
+
+/* Ensure cursor stays pointer on all interactive elements */
+.btn-primary,
+.btn-secondary,
+.category-btn,
+.project-link,
+.nav-link,
+.mobile-menu__link,
+.theme-toggle,
+.cert-nav-btn,
+.social-links a,
+.hero-social-links a,
+.footer-social a,
+.interest-item,
+.soft-skill-chip,
+.modal-close-btn,
+.modal-btn-primary,
+.modal-btn-secondary,
+.hamburger-lines,
+.mobile-menu__toggle,
+.mobile-menu__close {
+    cursor: pointer !important;
+}

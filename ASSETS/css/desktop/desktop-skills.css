@@ -1,0 +1,86 @@
+/* ============================================
+   DESKTOP SKILLS - Desktop-only enhancements
+   ============================================
+   Skill card styles for desktop layout
+   Respects prefers-reduced-motion
+   ============================================ */
+
+/* Desktop-only: Skill card optimizations */
+@media (min-width: 1024px) {
+    .skills-grid {
+        overflow: visible !important;
+        padding-top: 55px;
+    }
+    
+    .skill-icon-wrapper {
+        overflow: visible;
+        z-index: 10;
+    }
+
+    /* Subtle left-to-right hover effect on icon */
+    .skill-card:hover .skill-icon {
+        transform: translateX(8px) scale(1.05);
+    }
+
+    /* Expanded soft skills for desktop - all visible by default */
+    .soft-skills-list {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 0.85rem !important;
+        max-width: 1200px;
+        margin: 0 auto 1.5rem !important;
+    }
+    
+    .soft-skill-chip {
+        flex: 0 1 auto !important;
+        min-width: 180px;
+        max-width: 220px;
+    }
+    
+    .soft-skill-chip.hidden-extra {
+        display: inline-flex !important;
+    }
+
+    .soft-skills-toggle {
+        display: none !important;
+    }
+}
+
+/* Respect user's motion preferences - disable all animations */
+@media (prefers-reduced-motion: reduce) {
+    .skill-icon {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .skill-card:hover .skill-icon {
+        animation: none !important;
+        transform: none !important;
+    }
+
+    .soft-skill-chip {
+        animation: none !important;
+    }
+}
+
+/* Ultra-wide screens: more breathing room */
+@media (min-width: 1440px) {
+    .skills-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2.5rem;
+    }
+
+    .soft-skills-list {
+        display: grid !important;
+        grid-template-columns: repeat(5, 1fr) !important;
+        gap: 1rem !important;
+        max-width: 1400px !important;
+    }
+
+    .soft-skill-chip {
+        padding: 0.75rem 1.4rem;
+        font-size: 0.95rem;
+        width: 100% !important;
+    }
+}

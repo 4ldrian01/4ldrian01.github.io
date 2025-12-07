@@ -1,0 +1,636 @@
+/* ============================================
+   CARDS - Card Component Styles
+   ============================================ */
+
+/* -------------------- Skill Cards -------------------- */
+.skills-grid {
+    overflow: visible !important;
+    padding-top: 50px; /* Extra space for the overlapping icons */
+}
+
+.skill-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 3.5rem 1.75rem 1.75rem;
+    margin-top: 0; /* Removed - using padding on grid instead */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: visible !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    height: auto;
+    min-height: 240px;
+    max-height: none !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: var(--shadow-soft-lg);
+    border: 1px solid var(--green-accent-border);
+}
+
+/* Hide any scrollbars */
+.skill-card::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.skill-card {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+[data-theme="dark"] .skill-card {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(var(--green-accent-rgb), 0.15);
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(var(--green-accent-rgb), 0.15);
+    border-color: var(--green-accent);
+}
+
+[data-theme="dark"] .skill-card:hover {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(var(--green-accent-rgb), 0.4);
+}
+
+.skill-card-divider {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(140, 140, 140, 0.25), transparent);
+    margin: 0.75rem 0;
+    width: 100%;
+}
+
+.skill-icon-wrapper {
+    position: absolute;
+    top: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10; /* Higher z-index to ensure icon is always on top */
+}
+
+.skill-icon {
+    width: 90px;
+    height: 90px;
+    background: linear-gradient(145deg, var(--green-accent), var(--green-accent-hover));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #ffffff;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 25px rgba(var(--green-accent-rgb), 0.35);
+    border: 4px solid rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="dark"] .skill-icon {
+    background: linear-gradient(145deg, #ff5555, #ff3333);
+    box-shadow: 0 8px 25px rgba(255, 51, 51, 0.3);
+    border: 4px solid rgba(255, 255, 255, 0.15);
+}
+
+/* SVG Skill Icons */
+.skill-svg-icon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+    transition: transform 0.3s ease;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+    object-fit: contain;
+}
+
+/* Light theme SVG icons - white icons on olive bg */
+[data-theme="light"] .skill-svg-icon {
+    filter: brightness(0) invert(1);
+    opacity: 0.95;
+}
+
+/* Dark theme SVG icons - white icons on red bg */
+[data-theme="dark"] .skill-svg-icon {
+    filter: brightness(0) invert(1);
+    opacity: 0.95;
+}
+
+.skill-card:hover .skill-svg-icon {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+/* Subtle left-to-right hover animation on icon */
+.skill-card:hover .skill-icon {
+    transform: translateX(8px) scale(1.05);
+    box-shadow: 0 12px 35px rgba(var(--green-accent-rgb), 0.45);
+}
+
+[data-theme="dark"] .skill-card:hover .skill-icon {
+    background: linear-gradient(145deg, #ff6666, #ff4444);
+    transform: translateX(8px) scale(1.05);
+    box-shadow: 0 12px 35px rgba(255, 51, 51, 0.45);
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .skill-icon {
+        animation: none;
+        transition: none;
+    }
+    .skill-card:hover .skill-icon {
+        transform: none;
+    }
+}
+
+.skill-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.skill-title {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.skill-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.skill-list li {
+    color: var(--text-secondary);
+    margin: 0.4rem 0;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    position: relative;
+    cursor: pointer;
+    padding: 0.35rem 0.75rem;
+    border-radius: 8px;
+}
+
+.skill-list li:hover {
+    color: var(--primary-color);
+    background: rgba(255, 51, 51, 0.08);
+    transform: translateX(5px);
+}
+
+/* Skill Tooltip */
+.skill-list li[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform: translateX(-50%) translateY(-5px);
+    background: var(--secondary-color);
+    color: var(--text-color);
+    padding: 0.5rem 0.85rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s ease;
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 51, 51, 0.15);
+    pointer-events: none;
+}
+
+.skill-list li[data-tooltip]::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    transform: translateX(-50%) translateY(3px);
+    border: 6px solid transparent;
+    border-top-color: var(--secondary-color);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.25s ease;
+    z-index: 101;
+}
+
+.skill-list li[data-tooltip]:hover::after,
+.skill-list li[data-tooltip]:hover::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(-10px);
+}
+
+.skill-list li[data-tooltip]:hover::before {
+    transform: translateX(-50%) translateY(-2px);
+}
+
+/* -------------------- Project Cards -------------------- */
+.project-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-soft-lg);
+    border: 1px solid rgba(255, 68, 68, 0.08);
+    transform: translateY(0);
+    will-change: transform, box-shadow;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-elevated);
+}
+
+.project-category {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(255, 68, 68, 0.9);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.project-img-container {
+    position: relative;
+    width: 100%;
+    padding-top: 60%;
+    overflow: hidden;
+    background: rgba(255, 68, 68, 0.05);
+}
+
+/* Loading state for project images */
+.project-img-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.03) 25%,
+        rgba(255, 255, 255, 0.08) 50%,
+        rgba(255, 255, 255, 0.03) 75%
+    );
+    background-size: 200% 100%;
+    animation: imageLoading 1.5s infinite;
+    z-index: 1;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+/* Hide loading state when image is loaded */
+.project-img-container.loaded::before {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes imageLoading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+[data-theme="light"] .project-img-container::before {
+    background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.03) 25%,
+        rgba(0, 0, 0, 0.06) 50%,
+        rgba(0, 0, 0, 0.03) 75%
+    );
+    background-size: 200% 100%;
+}
+
+.project-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    will-change: transform;
+    opacity: 0;
+}
+
+/* Show image when loaded */
+.project-img.loaded {
+    opacity: 1;
+}
+
+.project-card:hover .project-img {
+    transform: scale(1.1);
+}
+
+.project-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    background: var(--project-content-bg);
+}
+
+.project-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.project-description {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: 0;
+    opacity: 0.8;
+    flex-grow: 1;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+.project-technologies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.project-tech {
+    background: rgba(255, 68, 68, 0.1);
+    color: var(--primary-color);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 0.5px solid rgba(255, 68, 68, 0.1);
+}
+
+.project-links {
+    margin-top: 1rem;
+}
+
+/* -------------------- Certification Cards -------------------- */
+.cert-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease;
+    box-shadow: var(--shadow-soft-md);
+    border: 1px solid rgba(var(--green-accent-rgb), 0.12);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Verified Badge for Certificates */
+.cert-verified-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    z-index: 5;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cert-verified-badge i {
+    font-size: 0.8rem;
+}
+
+.cert-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-elevated);
+    border-color: rgba(var(--green-accent-rgb), 0.3);
+}
+
+/* Certificate preview overlay on hover */
+.cert-image-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.cert-card:hover .cert-image-container::after {
+    opacity: 1;
+}
+
+/* Reduced motion for cert cards */
+@media (prefers-reduced-motion: reduce) {
+    .cert-card {
+        transition: box-shadow 0.2s ease;
+    }
+    .cert-card:hover {
+        transform: none;
+    }
+    .cert-image-container::after {
+        transition: none;
+    }
+}
+
+.cert-image-container {
+    width: 100%;
+    padding-top: 70%;
+    position: relative;
+    overflow: hidden;
+}
+
+.cert-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.cert-card:hover .cert-image {
+    transform: scale(1.05);
+}
+
+.cert-content {
+    padding: 1.5rem 1.25rem;
+    background: var(--cert-content-bg);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.cert-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.3;
+}
+
+.cert-issuer {
+    font-size: 0.9rem;
+    color: var(--green-accent);
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.cert-issuer::before {
+    content: '\f19d';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.cert-date {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    opacity: 0.8;
+    margin: 0;
+}
+
+/* -------------------- Stat Cards -------------------- */
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: rgba(255, 68, 68, 0.05);
+    border-radius: 12px;
+    transition: transform 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
+    cursor: default;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .stat-item:hover {
+        background: rgba(255, 68, 68, 0.1);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .stat-item:hover .stat-icon {
+        transform: scale(1.08);
+        background: rgba(255, 68, 68, 0.2);
+    }
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 68, 68, 0.1);
+    border-radius: 12px;
+    transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.stat-svg {
+    width: 35px;
+    height: 35px;
+    filter: invert(1);
+    opacity: 0.9;
+    transition: transform 0.3s ease;
+}
+
+/* Accessible theme-aware icon filter */
+[data-theme="light"] .stat-svg {
+    filter: invert(0.3) sepia(1) saturate(5) hue-rotate(335deg);
+    opacity: 1;
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-number {
+    font-size: clamp(1.35rem, 5vw, 2.2rem);
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    color: var(--text-secondary);
+    opacity: 0.8;
+    line-height: 1.3;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .stat-item:hover {
+        transform: none;
+    }
+
+    .stat-item:hover .stat-icon {
+        transform: none;
+    }
+
+    .stat-item,
+    .stat-icon {
+        transition: none;
+    }
+
+    .project-card,
+    .project-card:hover,
+    .project-card:hover .project-img,
+    .cert-card,
+    .cert-card:hover {
+        transition: none;
+        transform: none;
+    }
+}
+
+/* -------------------- Hardware Acceleration -------------------- */
+.project-card,
+.skill-card,
+.cert-card {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}

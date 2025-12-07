@@ -1,0 +1,99 @@
+/* ============================================
+   FOOTER - Footer Layout Styles
+   ============================================ */
+
+.copyright {
+    background: var(--section-background);
+    padding: 24px 0;
+    text-align: center;
+    border-top: 1px solid rgba(255, 68, 68, 0.1);
+    position: relative;
+}
+
+.copyright p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    flex-wrap: wrap;
+    line-height: 1.6;
+}
+
+.copyright span {
+    color: var(--primary-color);
+    font-weight: 600;
+    transition: color 0.25s ease;
+}
+
+.copyright span:hover {
+    color: var(--accent-hover);
+}
+
+/* Footer with social links variation */
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.footer-social a {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 68, 68, 0.08);
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.footer-social a:hover {
+    background: rgba(255, 68, 68, 0.15);
+    color: var(--primary-color);
+    transform: translateY(-2px);
+    border-color: rgba(255, 68, 68, 0.3);
+}
+
+.footer-social a:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Reduced motion for footer */
+@media (prefers-reduced-motion: reduce) {
+    .copyright span,
+    .footer-social a {
+        transition: none;
+    }
+    .footer-social a:hover {
+        transform: none;
+    }
+}
+
+/* Mobile footer adjustments */
+@media (max-width: 767px) {
+    .copyright {
+        padding: 20px 1rem;
+    }
+    
+    .copyright p {
+        font-size: 0.85rem;
+    }
+    
+    .footer-social a {
+        width: 44px;
+        height: 44px;
+    }
+}

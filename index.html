@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Security Headers (Non-CSP only - CSP should be set via HTTP headers) -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    
+    <!-- Primary Meta Tags -->
+    <title>Aldrian Muksan Sahid | IT Student & Aspiring Network Engineer Portfolio</title>
+    <meta name="title" content="Aldrian Muksan Sahid | IT Student & Aspiring Network Engineer Portfolio">
+    <meta name="description" content="Portfolio of Aldrian Muksan Sahid - 3rd year BS IT student at Western Mindanao State University. Passionate about web development, IT networking, cybersecurity, and innovative solutions. View projects, skills, and certifications.">
+    <meta name="keywords" content="Aldrian Sahid, Web Developer, IT Networking, Cybersecurity, IT Student, WMSU, Network Engineer, Portfolio, System Administrator, Programming, Zamboanga">
+    <meta name="author" content="Aldrian Muksan Sahid">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#000000">
+    <link rel="canonical" href="https://4ldrian01.github.io/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://4ldrian01.github.io/">
+    <meta property="og:title" content="Aldrian Muksan Sahid | IT Student & Aspiring Network Engineer Portfolio">
+    <meta property="og:description" content="Portfolio of Aldrian Muksan Sahid - 3rd year BS IT student. Passionate about web development, IT networking, cybersecurity, and innovative solutions.">
+    <meta property="og:image" content="https://4ldrian01.github.io/images/ALDRIAN-MAIN-IMG.png">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Aldrian Sahid Portfolio">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://4ldrian01.github.io/">
+    <meta name="twitter:title" content="Aldrian Muksan Sahid | IT Student & Aspiring Network Engineer Portfolio">
+    <meta name="twitter:description" content="Portfolio of Aldrian Muksan Sahid - 3rd year BS IT student. View projects, skills, and certifications.">
+    <meta name="twitter:image" content="https://4ldrian01.github.io/images/ALDRIAN-MAIN-IMG.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/letter-a.png">
+    <link rel="apple-touch-icon" href="images/letter-a.png">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="ASSETS/css/main.css?v=1.1" as="style">
+    <link rel="preload" href="images/ALDRIAN-MAIN-IMG.png" as="image">
+
+    <!-- Fonts - Using display=swap for better performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+
+    <!-- Font Awesome - Load synchronously for mobile compatibility -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <!-- Main Stylesheet (Modular CSS) -->
+    <link rel="stylesheet" href="ASSETS/css/main.css?v=1.1">
+
+    <!-- Theme initialization - MUST run before body renders to prevent flash -->
+    <script>
+        (function() {
+            try {
+                var savedTheme = localStorage.getItem('theme');
+                var prefersMobileLayout = window.matchMedia('(max-width: 1023px)').matches;
+                var defaultTheme = prefersMobileLayout ? 'light' : 'dark';
+                var theme = savedTheme || defaultTheme;
+                document.documentElement.setAttribute('data-theme', theme);
+            } catch (e) {
+                // Fallback: default to dark on desktop, light on mobile
+                var fallbackMobile = window.matchMedia('(max-width: 1023px)').matches;
+                document.documentElement.setAttribute('data-theme', fallbackMobile ? 'light' : 'dark');
+            }
+        })();
+    </script>
+</head>
+
+<body>
+
+    <!-- Skip to main content link for keyboard accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+
+    <main id="main-content">
+
+        <!-- Header Section -->
+        <header>
+            <a href="#home" class="logo" aria-label="Go to Home">ALDRIAN.</a>
+            <nav class="desktop-nav" role="navigation" aria-label="Main Navigation">
+                <ul class="nav-list">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#skills" class="nav-link">Skills</a></li>
+                    <li><a href="#portfolio" class="nav-link">Projects</a></li>
+                    <li><a href="#certifications" class="nav-link">Certifications</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="theme-toggle-container theme-toggle-mobile">
+                    <button class="theme-toggle" aria-label="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+                <button class="mobile-menu__toggle" aria-label="Toggle navigation" aria-expanded="false">
+                    <span class="hamburger-lines"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Desktop Fixed Theme Toggle (bottom-right) -->
+        <div class="theme-toggle-container theme-toggle-desktop">
+            <button class="theme-toggle" aria-label="Toggle Theme">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+
+        <nav class="mobile-menu" role="navigation" aria-label="Mobile Navigation">
+            <div class="mobile-menu__container">
+                <button class="mobile-menu__close" aria-label="Close navigation menu">
+                    <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
+                <ul class="mobile-menu__list" role="menubar">
+                    <li class="mobile-menu__item" role="none"><a href="#home" class="mobile-menu__link" role="menuitem">Home</a></li>
+                    <li class="mobile-menu__item" role="none"><a href="#about" class="mobile-menu__link" role="menuitem">About</a></li>
+                    <li class="mobile-menu__item" role="none"><a href="#skills" class="mobile-menu__link" role="menuitem">Skills</a></li>
+                    <li class="mobile-menu__item" role="none"><a href="#portfolio" class="mobile-menu__link" role="menuitem">Projects</a></li>
+                    <li class="mobile-menu__item" role="none"><a href="#certifications" class="mobile-menu__link" role="menuitem">Certifications</a></li>
+                    <li class="mobile-menu__item" role="none"><a href="#contact" class="mobile-menu__link" role="menuitem">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-left">
+                <div class="hero-content">
+                    <p class="hero-intro">Hello! I'm <span class="highlight">Aldrian</span></p>
+                    <h1 class="hero-title">
+                        <span class="hero-line">Aspiring <span class="changing-text" data-texts='["Network Engineer", "Developer", "System Administrator"]'>Network Engineer</span></span>
+                        <span class="hero-line"><span class="gradient-text">& IT Student</span></span>
+                    </h1>
+                    <p class="hero-subtitle">Passionate about Programming, IT Networking, <br> Cybersecurity, and creating
+                        innovative solutions.</p>
+                    <div class="btn-container">
+                        <a href="#contact" class="btn btn-primary">
+                            <i class="fas fa-download"></i>
+                            Download CV
+                        </a>
+                        <a href="#portfolio" class="btn btn-secondary">
+                            <i class="fas fa-code"></i>
+                            View Projects
+                        </a>
+                    </div>
+                    <div class="hero-social-links">
+                        <a href="https://www.linkedin.com/in/aldrian-sahid" target="_blank" rel="noopener"
+                            aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://github.com/4ldrian01" target="_blank" rel="noopener" aria-label="GitHub">
+                            <i class="fab fa-github" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://www.facebook.com/aldrian.dead" target="_blank" rel="noopener" aria-label="Facebook">
+                            <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://www.instagram.com/aint.drian_/" target="_blank" rel="noopener" aria-label="Instagram">
+                            <i class="fab fa-instagram" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-right">
+                <div class="profile-frame">
+                    <img src="images/ALDRIAN-MAIN-IMG.png" alt="Aldrian's profile picture" width="400" height="400"
+                        loading="eager" decoding="async">
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <img src="FLATICONS/broken-heart.svg" alt="Years Icon" class="stat-svg">
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" data-target="2">0</div>
+                        <div class="stat-label">Years of Missing You</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <img src="FLATICONS/coffee-cup.svg" alt="Coffee Icon" class="stat-svg">
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" data-target="2000">0</div>
+                        <div class="stat-label">Cups of Coffee consumed</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <img src="FLATICONS/project.svg" alt="Projects Icon" class="stat-svg">
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" data-target="10">0</div>
+                        <div class="stat-label">Projects Completed</div>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <img src="FLATICONS/coffee-cup.svg" alt="Clients Icon" class="stat-svg">
+                    </div>
+                    <div class="stat-content">
+                        <div class="stat-number" data-target="5">0</div>
+                        <div class="stat-label">Happy Clients</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <div class="section-header">
+                <h2 class="section-title">About <span class="highlight">Me</span></h2>
+                <p class="section-subtitle">Get to Know More About Me!</p>
+            </div>
+            <div class="about-content flex-container">
+                <div class="about-image-container">
+                    <div class="about-background-elements">
+                        <div class="background-circle"></div>
+                        <div class="background-circle"></div>
+                        <div class="background-circle"></div>
+                    </div>
+                    <img src="images/ALDRIAN-ABOUTMESECTION.jpg" alt="About Me Image" class="about-image"
+                        loading="lazy">
+                    <div class="about-interests-overlay">
+                        <div class="interests-grid">
+                            <div class="interest-item">
+                                <i class="fas fa-code"></i>
+                                <span>Coding</span>
+                            </div>
+                            <div class="interest-item">
+                                <i class="fas fa-coffee"></i>
+                                <span>Coffee</span>
+                            </div>
+                            <div class="interest-item">
+                                <i class="fas fa-dumbbell"></i>
+                                <span>Gym</span>
+                            </div>
+                            <div class="interest-item">
+                                <i class="fas fa-basketball-ball"></i>
+                                <span>Sports</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-content">
+                    <p class="text-paragraph">
+                        I am a motivated 3rd-year BS IT <i>(Bachelor's Science of Information Technology)</i> student
+                        from Western Mindanao State University seeking an internship opportunity to gain hands-on
+                        experience, develop
+                        technical and professional skills, and contribute to real-world projects.
+                    </p>
+                    <p class="text-paragraph">
+                        This portfolio was created as a project for my IT Elective 2 - Web Development course and
+                        fulfills requirements for my major in Advanced Database System. It is now my official
+                        personal
+                        portfolio, where i can showcase projects from past coursework and future projects!
+                    </p>
+                    
+                    <!-- Resume Download Button -->
+                    <div class="resume-download-wrapper">
+                        <a href="ASSETS/resume/Aldrian-Sahid-Resume.pdf" download class="btn btn-primary resume-btn">
+                            <i class="fas fa-download"></i>
+                            <span>Download My Resume</span>
+                        </a>
+                    </div>
+
+                    <div class="personal-info">
+                        <dl>
+                            <dt class="info-name">Name:</dt>
+                            <dd>Aldrian Muksan Sahid</dd>
+                            <dt class="info-dob">Date of Birth:</dt>
+                            <dd>March 13, 2005</dd>
+                            <dt class="info-address">Address:</dt>
+                            <dd>Zamboanga City, Philippines | 7000</dd>
+                            <dt class="info-email">Email:</dt>
+                            <dd><a href="mailto:aldriansahid30@gmail.com">aldriansahid30@gmail.com</a></dd>
+                            <dt class="info-phone">Phone:</dt>
+                            <dd> (+63) 955 800 1142</dd>
+                            <dt class="info-program">Program:</dt>
+                            <dd>BS Information Technology</dd>
+                            <dt class="info-institution">Institution:</dt>
+                            <dd>Western Mindanao State University</dd>
+                            <dt class="info-languages">Languages | Ethnicity:</dt>
+                            <dd>English, Filipino | Tausug</dd>
+                        </dl>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <div class="section-header">
+                <h2 class="section-title">My <span class="highlight">Skills</span></h2>
+                <p class="section-subtitle">Explore the skills I've developed!</p>
+            </div>
+
+            <div class="skills-container">
+                <h3 class="skills-subheader"><span class="highlight">Technical Skills</span></h3>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-icon">
+                                <img src="ASSETS/icons/skills/programming.svg" alt="Programming Icon" class="skill-svg-icon">
+                            </div>
+                        </div>
+                        <div class="skill-content">
+                            <h3 class="skill-title">Computer Programming</h3>
+                            <hr class="skill-card-divider">
+                            <ul class="skill-list">
+                                <li data-tooltip="Object-Oriented Programming & Data Structures">C++</li>
+                                <li data-tooltip="Automation, Scripting & Data Analysis">Python</li>
+                                <li data-tooltip="Enterprise Applications & Android Development">Java</li>
+                                <li data-tooltip="Server-side Web Development">PHP</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-icon">
+                                <img src="ASSETS/icons/skills/design.svg" alt="Design Icon" class="skill-svg-icon">
+                            </div>
+                        </div>
+                        <div class="skill-content">
+                            <h3 class="skill-title">UX/UI Design</h3>
+                            <hr class="skill-card-divider">
+                            <ul class="skill-list">
+                                <li data-tooltip="Wireframing & Interactive Prototypes">Figma Prototyping</li>
+                                <li data-tooltip="Graphics & Social Media Content">Canva Design</li>
+                                <li data-tooltip="UI Mockups & Design Systems">Adobe XD</li>
+                                <li data-tooltip="Photo Editing & Creative Design">PicsArt</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-icon">
+                                <img src="ASSETS/icons/skills/web-development.svg" alt="Web Development Icon" class="skill-svg-icon">
+                            </div>
+                        </div>
+                        <div class="skill-content">
+                            <h3 class="skill-title">Web Development</h3>
+                            <hr class="skill-card-divider">
+                            <ul class="skill-list">
+                                <li data-tooltip="Semantic Markup & Accessibility">HTML5</li>
+                                <li data-tooltip="Responsive Design & Animations">CSS3</li>
+                                <li data-tooltip="Interactive Frontend & DOM Manipulation">JavaScript</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon-wrapper">
+                            <div class="skill-icon">
+                                <img src="ASSETS/icons/skills/database.svg" alt="Database Icon" class="skill-svg-icon">
+                            </div>
+                        </div>
+                        <div class="skill-content">
+                            <h3 class="skill-title">Database</h3>
+                            <hr class="skill-card-divider">
+                            <ul class="skill-list">
+                                <li data-tooltip="Relational Database & Query Optimization">MySQL Database Design</li>
+                                <li data-tooltip="Advanced RDBMS & Data Integrity">PostgreSQL</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="skills-subheader">Soft Skills</h3>
+                <ul class="soft-skills-list">
+                    <li class="soft-skill-chip" data-level="expert"><span class="skill-badge">🔥</span>Problem Solving</li>
+                    <li class="soft-skill-chip" data-level="expert"><span class="skill-badge">🔥</span>Time Management</li>
+                    <li class="soft-skill-chip" data-level="advanced"><span class="skill-badge">⭐</span>Teamwork</li>
+                    <li class="soft-skill-chip" data-level="advanced"><span class="skill-badge">⭐</span>Communication</li>
+                    <li class="soft-skill-chip hidden-extra" data-level="advanced"><span class="skill-badge">⭐</span>Critical Thinking</li>
+                    <li class="soft-skill-chip hidden-extra" data-level="advanced"><span class="skill-badge">⭐</span>Adaptability</li>
+                    <li class="soft-skill-chip hidden-extra" data-level="intermediate"><span class="skill-badge">✓</span>Collaboration</li>
+                    <li class="soft-skill-chip hidden-extra" data-level="intermediate"><span class="skill-badge">✓</span>Creativity</li>
+                    <li class="soft-skill-chip hidden-extra" data-level="intermediate"><span class="skill-badge">✓</span>Resourcefulness</li>
+                    <li class="soft-skill-chip hidden-extra" data-level="intermediate"><span class="skill-badge">✓</span>Work Ethic</li>
+                </ul>
+                <button class="soft-skills-toggle" aria-expanded="false">
+                    <span class="toggle-text">Show More</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio">
+            <div class="section-header">
+                <h2 class="section-title">Port<span class="highlight">Folio</span></h2>
+                <p class="section-subtitle">Big or small, Explore my recent projects across different domains!</p>
+            </div>
+
+            <!-- Project Categories -->
+            <div class="project-categories" role="group" aria-label="Filter projects by category">
+                <button class="category-btn active" data-filter="all" aria-label="Show all projects" aria-pressed="true"><i class="fas fa-th-large"></i> All
+                    Projects</button>
+                <button class="category-btn" data-filter="web" aria-label="Filter by Web Development" aria-pressed="false"><i class="fas fa-globe"></i> Web Development</button>
+                <button class="category-btn" data-filter="networking" aria-label="Filter by Networking" aria-pressed="false"><i class="fas fa-network-wired"></i>
+                    Networking</button>
+                <button class="category-btn" data-filter="python" aria-label="Filter by Python" aria-pressed="false"><i class="fab fa-python"></i> Python</button>
+                <button class="category-btn" data-filter="cpp" aria-label="Filter by C++" aria-pressed="false"><i class="fas fa-code"></i> C++</button>
+            </div>
+
+            <div class="portfolio-container">
+                <div class="portfolio-rows">
+                    <div class="portfolio-row" id="portfolioRow1">
+                        <!-- First Row -->
+                        <div class="project-card" data-category="web">
+                            <div class="project-category"><i class="fas fa-globe"></i> Web Development</div>
+                            <div class="project-img-container">
+                                <img src="images/PERSONAL-PORTFOLIO-IMG.JPG" alt="Personal Portfolio"
+                                    class="project-img" loading="eager">
+                            </div>
+                            <div class="project-content">
+                                <h3 class="project-title">Personal Portfolio Website</h3>
+                                <p class="project-description">A comprehensive responsive personal portfolio system
+                                    showcasing my information details, skills, and projects!</p>
+                                <div class="project-technologies">
+                                    <span class="project-tech">HTML</span>
+                                    <span class="project-tech">CSS</span>
+                                    <span class="project-tech">JAVASCRIPT</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" class="project-link" data-project="personal-portfolio">View more</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card" data-category="web">
+                            <div class="project-category"><i class="fas fa-globe"></i> Web Development</div>
+                            <div class="project-img-container">
+                                <img src="images/student-management.jpg" alt="Student Management System"
+                                    class="project-img" loading="lazy">
+                            </div>
+                            <div class="project-content">
+                                <h3 class="project-title">Student Management System</h3>
+                                <p class="project-description">A web-based system for managing student records, grades,
+                                    and academic information with admin dashboard.</p>
+                                <div class="project-technologies">
+                                    <span class="project-tech">HTML</span>
+                                    <span class="project-tech">CSS</span>
+                                    <span class="project-tech">PHP</span>
+                                    <span class="project-tech">MySQL</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" class="project-link" data-project="student-management">View more</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card" data-category="networking">
+                            <div class="project-category"><i class="fas fa-network-wired"></i> Networking</div>
+                            <div class="project-img-container">
+                                <img src="images/network-design.jpg" alt="Network Design Project" class="project-img"
+                                    loading="lazy">
+                            </div>
+                            <div class="project-content">
+                                <h3 class="project-title">Campus Network Design</h3>
+                                <p class="project-description">A comprehensive network design project for campus-wide
+                                    connectivity with security implementation.</p>
+                                <div class="project-technologies">
+                                    <span class="project-tech">Cisco</span>
+                                    <span class="project-tech">Network Design</span>
+                                    <span class="project-tech">Security</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" class="project-link" data-project="campus-network">View more</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="portfolio-row" id="portfolioRow2">
+                        <!-- Second Row -->
+                        <div class="project-card" data-category="python">
+                            <div class="project-category"><i class="fab fa-python"></i> Python</div>
+                            <div class="project-img-container">
+                                <img src="images/python-project.jpg" alt="Python Automation" class="project-img"
+                                    loading="lazy">
+                            </div>
+                            <div class="project-content">
+                                <h3 class="project-title">File Management Automation</h3>
+                                <p class="project-description">Python automation script for efficient file organization
+                                    and management with GUI interface. </p>
+                                <div class="project-technologies">
+                                    <span class="project-tech">Python</span>
+                                    <span class="project-tech">Tkinter</span>
+                                    <span class="project-tech">Automation</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" class="project-link" data-project="file-automation">View more</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card" data-category="cpp">
+                            <div class="project-category"><i class="fas fa-code"></i> C++</div>
+                            <div class="project-img-container">
+                                <img src="images/cpp-project.jpg" alt="C++ Project" class="project-img"
+                                    loading="lazy">
+                            </div>
+                            <div class="project-content">
+                                <h3 class="project-title">Library Management System</h3>
+                                <p class="project-description">Console-based library management system with book
+                                    tracking and member management features.</p>
+                                <div class="project-technologies">
+                                    <span class="project-tech">C++</span>
+                                    <span class="project-tech">OOP</span>
+                                    <span class="project-tech">File I/O</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" class="project-link" data-project="library-system">View more</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card" data-category="web">
+                            <div class="project-category"><i class="fas fa-globe"></i> Web Development</div>
+                            <div class="project-img-container">
+                                <img src="images/ecommerce.jpg" alt="E-commerce Project" class="project-img"
+                                    loading="lazy">
+                            </div>
+                            <div class="project-content">
+                                <h3 class="project-title">E-commerce Platform</h3>
+                                <p class="project-description">A responsive e-commerce website with product management
+                                    and shopping cart functionality.</p>
+                                <div class="project-technologies">
+                                    <span class="project-tech">HTML</span>
+                                    <span class="project-tech">CSS</span>
+                                    <span class="project-tech">JavaScript</span>
+                                    <span class="project-tech">PHP</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" class="project-link" data-project="ecommerce-platform">View more</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="view-more-container" style="text-align: center; margin-top: 2rem; width: 100%;">
+                    <button id="viewMoreBtn" class="btn btn-secondary" style="display: none;">
+                        View More <i class="fas fa-arrow-down"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section class="certifications" id="certifications">
+            <div class="section-header">
+                <h2 class="section-title">Certi<span class="highlight">fications</span></h2>
+                <p class="section-subtitle">Check out My Certifications of Completions and Achievements</p>
+            </div>
+
+            <div class="certifications-container">
+                <div class="cert-rows">
+                    <div class="cert-row active" id="certRow1">
+                        <!-- Certificate 1 -->
+                        <div class="cert-card">
+                            <span class="cert-verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+                            <div class="cert-image-container">
+                                <img src="images/certificates/NETWORKING-SIMPLILEARN-CERTS_page-0001.jpg" alt="Certificate 1" class="cert-image"
+                                    loading="lazy">
+                            </div>
+                            <div class="cert-content">
+                                <h3 class="cert-title">Intro to Computer Networking </h3>
+                                <p class="cert-issuer">SimpliLearn</p>
+                                <p class="cert-date">Date Earned: June 2025</p>
+                            </div>
+                        </div>
+
+                        <!-- Certificate 2 -->
+                        <div class="cert-card">
+                            <div class="cert-image-container">
+                                <img src="images/cert-placeholder.jpg" alt="Certificate 2" class="cert-image"
+                                    loading="lazy">
+                            </div>
+                            <div class="cert-content">
+                                <h3 class="cert-title">Certificate Title 2</h3>
+                                <p class="cert-issuer">Issuing Organization</p>
+                                <p class="cert-date">Date Earned: Month Year</p>
+                            </div>
+                        </div>
+
+                        <!-- Certificate 3 -->
+                        <div class="cert-card">
+                            <div class="cert-image-container">
+                                <img src="images/cert-placeholder.jpg" alt="Certificate 3" class="cert-image"
+                                    loading="lazy">
+                            </div>
+                            <div class="cert-content">
+                                <h3 class="cert-title">Certificate Title 3</h3>
+                                <p class="cert-issuer">Issuing Organization</p>
+                                <p class="cert-date">Date Earned: Month Year</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cert-row" id="certRow2">
+                        <!-- Certificate 4 -->
+                        <div class="cert-card">
+                            <div class="cert-image-container">
+                                <img src="images/cert-placeholder.jpg" alt="Certificate 4" class="cert-image"
+                                    loading="lazy">
+                            </div>
+                            <div class="cert-content">
+                                <h3 class="cert-title">Certificate Title 4</h3>
+                                <p class="cert-issuer">Issuing Organization</p>
+                                <p class="cert-date">Date Earned: Month Year</p>
+                            </div>
+                        </div>
+
+                        <!-- Certificate 5 -->
+                        <div class="cert-card">
+                            <div class="cert-image-container">
+                                <img src="images/cert-placeholder.jpg" alt="Certificate 5" class="cert-image"
+                                    loading="lazy">
+                            </div>
+                            <div class="cert-content">
+                                <h3 class="cert-title">Certificate Title 5</h3>
+                                <p class="cert-issuer">Issuing Organization</p>
+                                <p class="cert-date">Date Earned: Month Year</p>
+                            </div>
+                        </div>
+
+                        <!-- Certificate 6 -->
+                        <div class="cert-card">
+                            <div class="cert-image-container">
+                                <img src="images/cert-placeholder.jpg" alt="Certificate 6" class="cert-image"
+                                    loading="lazy">
+                            </div>
+                            <div class="cert-content">
+                                <h3 class="cert-title">Certificate Title 6</h3>
+                                <p class="cert-issuer">Issuing Organization</p>
+                                <p class="cert-date">Date Earned: Month Year</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="cert-nav-btn prev-btn" id="prevCert" aria-label="Previous certificates">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="cert-nav-btn next-btn" id="nextCert" aria-label="Next certificates">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="section-header">
+                <h2 class="section-title">Contact <span class="highlight"> Me</span></h2>
+                <p class="section-subtitle">Let's Connect and Create Something Amazing Together!</p>
+            </div>
+
+            <div class="contact-wrapper">
+                <div class="contact-form">
+                    <h2>Get in Touch</h2>
+                    <p class="form-notice">Your personal information will be kept confidential.</p>
+                    <hr>
+                    <form action="https://api.web3forms.com/submit" method="POST" id="contactForm" novalidate>
+                        <!-- Web3Forms Access Key -->
+                        <input type="hidden" name="access_key" value="2e408031-438d-4efd-a25a-919ba433439c">
+                        
+                        <!-- Web3Forms Configuration -->
+                        <input type="hidden" name="subject" value="New Contact Form Submission - Portfolio">
+                        <input type="hidden" name="from_name" value="Portfolio Contact Form">
+                        <input type="hidden" name="redirect" value="">
+                        
+                        <!-- Honeypot Spam Protection (Do not fill this field) -->
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;" tabindex="-1" aria-hidden="true">
+                        
+                        <!-- Form Status Announcer for Screen Readers -->
+                        <div class="sr-only" aria-live="assertive" aria-atomic="true" id="formAnnouncer"></div>
+                        
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label for="name">Full Name <span class="required-indicator" aria-hidden="true">*</span></label>
+                                <input type="text" id="name" name="name" required 
+                                    placeholder="e.g., Juan Dela Cruz" 
+                                    aria-describedby="nameHint nameError" 
+                                    aria-required="true"
+                                    autocomplete="name">
+                                <span class="input-hint" id="nameHint">Enter your full name as you'd like to be addressed</span>
+                                <span class="error-message" id="nameError" role="alert" aria-live="polite"></span>
+                            </div>
+                            <div class="input-group">
+                                <label for="email">Email Address <span class="required-indicator" aria-hidden="true">*</span></label>
+                                <input type="email" id="email" name="email" required 
+                                    placeholder="e.g., your.email@example.com" 
+                                    aria-describedby="emailHint emailError" 
+                                    aria-required="true"
+                                    autocomplete="email">
+                                <span class="input-hint" id="emailHint">I'll use this to respond to your message</span>
+                                <span class="error-message" id="emailError" role="alert" aria-live="polite"></span>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="subject">Subject <span class="required-indicator" aria-hidden="true">*</span></label>
+                            <input type="text" id="subject" name="user_subject" required 
+                                placeholder="e.g., Project Collaboration, Job Opportunity, General Inquiry" 
+                                aria-describedby="subjectHint subjectError" 
+                                aria-required="true">
+                            <span class="input-hint" id="subjectHint">Brief topic of your message</span>
+                            <span class="error-message" id="subjectError" role="alert" aria-live="polite"></span>
+                        </div>
+                        <div class="input-group">
+                            <label for="message">Message <span class="required-indicator" aria-hidden="true">*</span></label>
+                            <textarea id="message" name="message" required 
+                                placeholder="Hi Aldrian! I'd like to discuss..." 
+                                aria-describedby="messageHint messageError" 
+                                aria-required="true"></textarea>
+                            <span class="input-hint" id="messageHint">Share details about your project, question, or opportunity</span>
+                            <span class="error-message" id="messageError" role="alert" aria-live="polite"></span>
+                        </div>
+                        <div class="form-status" id="formStatus" role="status" aria-live="polite" aria-atomic="true"></div>
+                        <button type="submit" class="submit-btn" aria-describedby="form-response-time">
+                            <i class="fas fa-paper-plane" aria-hidden="true"></i> <span>Send Message</span>
+                        </button>
+                        <div class="response-time" id="form-response-time">
+                            <i class="fas fa-clock" aria-hidden="true"></i>
+                            <span>Typically responds within 24 hours</span>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="contact-details">
+                    <div class="contact-group info-group">
+                        <h3 class="contact-group-title">Contact Information</h3>
+                        <div class="contact-items-wrapper">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <a href="mailto:aldriansahid30@gmail.com">aldriansahid30@gmail.com</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <a href="tel:+639558001142">(+63) 955 800 1142</a>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Zamboanga City, Philippines | 7000</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Available for freelance opportunities</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-group social-group">
+                        <h3 class="contact-group-title">Connect With Me</h3>
+                        <div class="social-links-wrapper">
+                            <div class="social-links">
+                                <a href="https://www.linkedin.com/in/aldrian-sahid" target="_blank" rel="noopener" aria-label="LinkedIn">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="https://github.com/4ldrian01" target="_blank" rel="noopener" aria-label="GitHub">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://www.facebook.com/aldrian.dead" target="_blank" rel="noopener" aria-label="Facebook">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://www.instagram.com/aint.drian_/" target="_blank" rel="noopener" aria-label="Instagram">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="copyright">
+        <p>© <span id="currentYear"></span> Developed by <span>Aldrian Sahid.</span> All rights reserved.
+        </p>
+    </footer>
+
+    <!-- JSON-LD Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Aldrian Muksan Sahid",
+        "url": "https://4ldrian01.github.io/",
+        "image": "https://4ldrian01.github.io/images/ALDRIAN-MAIN-IMG.png",
+        "jobTitle": "IT Student & Aspiring Network Engineer",
+        "worksFor": {
+            "@type": "EducationalOrganization",
+            "name": "Western Mindanao State University"
+        },
+        "alumniOf": {
+            "@type": "EducationalOrganization",
+            "name": "Western Mindanao State University"
+        },
+        "knowsAbout": ["Web Development", "IT Networking", "Cybersecurity", "System Administration", "Programming"],
+        "email": "aldriansahid30@gmail.com",
+        "telephone": "+639558001142",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Zamboanga City",
+            "addressCountry": "Philippines",
+            "postalCode": "7000"
+        },
+        "sameAs": [
+            "https://www.linkedin.com/in/aldrian-sahid",
+            "https://github.com/4ldrian01",
+            "https://www.facebook.com/aldrian.dead",
+            "https://www.instagram.com/aint.drian_/"
+        ]
+    }
+    </script>
+
+    <!-- Main Application Entry Point (ES Modules) -->
+    <script type="module" src="ASSETS/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,183 @@
+/* ============================================
+   MOBILE BASE - Core Mobile Styles
+   ============================================
+   This file contains foundational mobile-first styles
+   that apply to all mobile devices (max-width: 767px)
+   ============================================ */
+
+/* -------------------- Mobile Container -------------------- */
+@media (max-width: 767px) {
+    .container {
+        padding: 0 1rem;
+    }
+
+    /* -------------------- Mobile Typography -------------------- */
+    .section-title {
+        font-size: 1.75rem;
+    }
+
+    .section-subtitle {
+        font-size: 1rem;
+    }
+
+    /* -------------------- Mobile Buttons -------------------- */
+    .btn-container {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+    }
+
+    /* -------------------- Mobile General Section -------------------- */
+    section {
+        text-align: center;
+        background: radial-gradient(
+            circle at center,
+            rgba(255, 68, 68, 0.1),
+            transparent 70%
+        ),
+        linear-gradient(145deg, var(--secondary-color), var(--background-color));
+    }
+
+    /* -------------------- Reduce Motion for Performance -------------------- */
+    .project-card,
+    .skill-card,
+    .cert-card {
+        transform: none !important;
+    }
+
+    .project-card:hover,
+    .skill-card:hover,
+    .cert-card:hover {
+        transform: translateY(-5px) !important;
+    }
+
+    /* -------------------- Optimize Animations -------------------- */
+    @keyframes simpleFadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .hero-left,
+    .hero-right,
+    .about-image-container,
+    .text-content {
+        animation: simpleFadeIn 0.5s ease-out forwards;
+    }
+
+    /* Disable complex parallax on mobile */
+    .image-main.js-parallax,
+    .image-main {
+        animation: none;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* -------------------- Mobile Performance Optimizations -------------------- */
+    .floating-icon,
+    .tech-icon,
+    .accent-circle {
+        display: none;
+    }
+
+    /* Reduce box-shadows on mobile */
+    .project-card,
+    .skill-card,
+    .cert-card,
+    .contact-form,
+    .contact-group {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* -------------------- Touch-Friendly Tap Targets -------------------- */
+    .nav-link,
+    .btn,
+    .social-links a,
+    .category-btn {
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* -------------------- Hide Desktop-Only Elements -------------------- */
+    .desktop-nav {
+        display: none !important;
+    }
+
+    .hero-right {
+        display: none;
+    }
+
+    .about-interests {
+        display: none;
+    }
+}
+
+/* -------------------- Small Mobile (max-width: 480px) - Mobile M -------------------- */
+@media (max-width: 480px) {
+    body {
+        font-size: 15px;
+    }
+
+    section {
+        padding: 70px 5%;
+    }
+
+    .container {
+        padding: 0 0.75rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        padding: 6px 14px;
+        font-size: 0.8rem;
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .btn-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* -------------------- Very Small Mobile (max-width: 375px) - Mobile S -------------------- */
+@media (max-width: 375px) {
+    body {
+        font-size: 14px;
+    }
+
+    section {
+        padding: 60px 4%;
+    }
+
+    .container {
+        padding: 0 0.5rem;
+    }
+
+    .section-title {
+        font-size: 1.35rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.85rem;
+    }
+
+    .btn {
+        padding: 5px 12px;
+        font-size: 0.75rem;
+        max-width: 230px;
+    }
+}

@@ -1,0 +1,37 @@
+# robots.txt for Aldrian Sahid Portfolio
+# https://4ldrian01.github.io/
+# Last Updated: December 7, 2025
+
+# Allow all search engines to crawl the site
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /manifest.json
+Allow: /images/
+
+# Allow crawling of important content
+Allow: /#home
+Allow: /#about
+Allow: /#skills
+Allow: /#portfolio
+Allow: /#certifications
+Allow: /#contact
+
+# Disallow crawling of assets that don't need indexing
+Disallow: /ASSETS/js/
+Disallow: /ASSETS/css/
+Disallow: /FLATICONS/
+
+# Disallow draft/test files (if any)
+Disallow: /drafts/
+Disallow: /test/
+Disallow: /_drafts/
+Disallow: /_test/
+Disallow: /*.tmp$
+Disallow: /*.bak$
+
+# Sitemap location
+Sitemap: https://4ldrian01.github.io/sitemap.xml
+
+# Crawl-delay (optional - be gentle with server resources)
+Crawl-delay: 1

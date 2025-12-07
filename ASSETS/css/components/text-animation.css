@@ -1,0 +1,234 @@
+/* ============================================
+   TEXT ANIMATION - Typing Effect Styles
+   ============================================
+   Styles for the hero section changing text animation
+   Optimized for desktop (1440px) and laptop (1024px) views
+   ============================================ */
+
+/* ==========================================
+   BASE STYLES - Changing Text Element
+   ========================================== */
+
+.changing-text {
+    /* Prevent layout shift - display inline-block for min-width to work */
+    display: inline-block;
+    
+    /* Prevent text wrapping on desktop/laptop */
+    white-space: nowrap;
+    
+    /* Vertical alignment with surrounding text */
+    vertical-align: baseline;
+    
+    /* Smooth text rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+    /* Inherit font styles from parent */
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+}
+
+/* Reserved width class - prevents layout shift */
+.typing-text-reserved {
+    /* JS sets min-width dynamically based on widest text */
+    /* This class acts as a marker and ensures proper display */
+    display: inline-block;
+    text-align: left;
+}
+
+
+/* ==========================================
+   CURSOR STYLES - Blinking Cursor Effect
+   ========================================== */
+
+.typing-cursor {
+    position: relative;
+    display: inline;
+}
+
+.typing-cursor::after {
+    content: "|";
+    display: inline;
+    margin-left: 2px;
+    font-weight: 700;
+    font-size: 1em;
+    color: var(--primary-color, #ff4444);
+    animation: typing-cursor-blink 0.75s step-end infinite;
+    text-shadow: 0 0 8px rgba(255, 68, 68, 0.45);
+    pointer-events: none;
+    vertical-align: baseline;
+}
+
+/* Desktop (1024px+) - Thick cursor */
+@media (min-width: 1024px) {
+    .typing-cursor::after {
+        font-weight: 700;
+        font-size: 1em;
+    }
+}
+
+/* Tablet and Mobile (max-width: 1023px) - Thin cursor */
+@media (max-width: 1023px) {
+    .typing-cursor::after {
+        content: "|";
+        font-weight: 100;
+        font-size: 0.9em;
+        margin-left: 1px;
+    }
+}
+
+@keyframes typing-cursor-blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Cursor glow effect for dark theme */
+[data-theme="dark"] .typing-cursor::after {
+    box-shadow: 0 0 8px rgba(255, 68, 68, 0.35);
+}
+
+
+/* ==========================================
+   REDUCED MOTION - Accessibility
+   ========================================== */
+
+/* When user prefers reduced motion */
+.typing-reduced-motion {
+    /* Remove cursor animation */
+    animation: none !important;
+    border-right: none !important;
+    padding-right: 0 !important;
+}
+
+.typing-reduced-motion::after {
+    animation: none !important;
+}
+
+/* System-level reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .typing-cursor::after {
+        animation: none !important;
+    }
+    
+    .changing-text {
+        /* Show static text without animation */
+        transition: none !important;
+    }
+}
+
+
+/* ==========================================
+   DESKTOP 1440px+ - Large Desktop View
+   ========================================== */
+
+@media (min-width: 1440px) {
+    .changing-text {
+        /* Slightly larger text for large desktop */
+        font-size: inherit;
+        
+        /* Ensure no wrapping on wide screens */
+        white-space: nowrap;
+        
+        /* Reserve minimum width for layout stability */
+        min-width: 180px; /* Fallback if JS fails */
+    }
+    
+    .typing-cursor::after {
+        /* Cursor stays inline - no positioning needed */
+        margin-left: 3px;
+    }
+}
+
+
+/* ==========================================
+   LAPTOP 1024px - 1439px - Standard Laptop View
+   ========================================== */
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+    .changing-text {
+        /* Ensure text doesn't wrap at laptop widths */
+        white-space: nowrap;
+        
+        /* Minimum width fallback for layout stability */
+        min-width: 160px; /* Fallback if JS fails */
+        
+        /* Slightly reduced size if needed for fit */
+        font-size: inherit;
+    }
+    
+    .typing-cursor::after {
+        /* Cursor stays inline - consistent across all desktop sizes */
+        margin-left: 2px;
+    }
+}
+
+
+/* ==========================================
+   TABLET/MOBILE - Allow wrapping if needed
+   ========================================== */
+
+@media (max-width: 1023px) {
+    .changing-text {
+        /* Allow text to be more flexible on smaller screens */
+        white-space: normal;
+        display: inline;
+        min-width: auto;
+    }
+    
+    .typing-text-reserved {
+        /* Reset reserved width on mobile */
+        min-width: auto !important;
+    }
+    
+    .typing-cursor::after {
+        /* Cursor stays inline and responsive */
+        margin-left: 2px;
+    }
+}
+
+
+/* ==========================================
+   HERO SECTION SPECIFIC - Context Styles
+   ========================================== */
+
+/* Ensure hero line with changing text maintains layout */
+.hero-line .changing-text,
+.hero-title .changing-text {
+    /* Inherit hero title styling */
+    font-weight: inherit;
+    color: var(--primary-color, #ff4444);
+}
+
+/* Desktop hero specific adjustments */
+@media (min-width: 1024px) {
+    .hero-line .changing-text,
+    .hero-title .changing-text {
+        /* Ensure inline-block for width reservation */
+        display: inline-block;
+        vertical-align: baseline;
+    }
+}
+
+
+/* ==========================================
+   UTILITY CLASSES
+   ========================================== */
+
+/* Force no animation (utility class) */
+.no-typing-animation .changing-text {
+    animation: none !important;
+    border-right: none !important;
+}
+
+/* Hide cursor (utility class) */
+.hide-cursor .typing-cursor {
+    border-right: none !important;
+    padding-right: 0 !important;
+}

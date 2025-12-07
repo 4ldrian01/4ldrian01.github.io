@@ -1,0 +1,192 @@
+/* ============================================
+   TYPOGRAPHY - Font & Text Styles
+   ============================================ */
+
+/* Base Typography Settings */
+body {
+    font-size: clamp(0.95rem, 1.5vw, 1rem);
+    line-height: 1.6;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: var(--text-color);
+}
+
+h1 {
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+}
+
+h3 {
+    font-size: clamp(1.35rem, 3vw, 1.75rem);
+    font-weight: 600;
+}
+
+h4 {
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    font-weight: 600;
+}
+
+h5 {
+    font-size: clamp(0.95rem, 2vw, 1.15rem);
+    font-weight: 600;
+}
+
+h6 {
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    font-weight: 600;
+}
+
+/* Paragraphs */
+p {
+    margin-bottom: 1rem;
+    line-height: 1.7;
+    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+}
+
+/* Links */
+a {
+    color: var(--secondary-accent, var(--text-color));
+    transition: color var(--transition-speed) ease, outline-color var(--transition-speed) ease;
+}
+
+a:hover {
+    color: var(--primary-color);
+}
+
+a:focus-visible {
+    outline: 3px solid var(--secondary-accent, var(--primary-color));
+    outline-offset: 3px;
+}
+
+/* Text Utilities */
+.text-primary {
+    color: var(--primary-color);
+}
+
+.text-secondary {
+    color: var(--text-secondary);
+}
+
+.text-success,
+.text-green {
+    color: var(--green-accent);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+/* Highlight Text */
+.highlight {
+    color: var(--primary-color);
+    display: inline-block;
+    position: relative;
+}
+
+/* Gradient Text */
+.gradient-text {
+    background: linear-gradient(
+        135deg,
+        var(--gradient-start),
+        var(--gradient-end)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% 200%;
+    animation: gradientFlow 4s ease infinite;
+}
+
+@keyframes gradientFlow {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Typing Cursor Effect - MOVED to components/text-animation.css
+   The full typing animation styles are now in the dedicated component file
+   for better maintainability and desktop/laptop (1440px/1024px) optimization.
+   No fallback needed - all cursor styles are in text-animation.css
+*/
+
+/* Section Headers */
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 0 2%;
+    width: 100%;
+}
+
+.section-title {
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -9px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--primary-color),
+        transparent
+    );
+    box-shadow: 0 0 5px rgba(255, 68, 68, 0.3);
+    animation: pulseWidth 6s ease-in-out infinite alternate;
+}
+
+@keyframes pulseWidth {
+    0% {
+        width: 60px;
+        opacity: 0.8;
+    }
+    100% {
+        width: 80px;
+        opacity: 1;
+    }
+}
+
+.section-subtitle {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
