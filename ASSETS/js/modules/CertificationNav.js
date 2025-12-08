@@ -296,7 +296,8 @@ export class CertificationNav {
     }
 
     setupSingleMode() {
-        this.cards = Array.from(document.querySelectorAll('.cert-card'));
+        // Count all visible base cards (CSS hides desktop-only-card and lt-only-card on mobile)
+        this.cards = Array.from(document.querySelectorAll('.cert-card:not(.desktop-only-card):not(.lt-only-card)'));
         if (this.cards.length === 0) return;
 
         if (this.currentCardIndex < 0 || this.currentCardIndex >= this.cards.length) {

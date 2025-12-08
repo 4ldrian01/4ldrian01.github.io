@@ -5,28 +5,35 @@
 /* -------------------- Skill Cards -------------------- */
 .skills-grid {
     overflow: visible !important;
-    padding-top: 50px; /* Extra space for the overlapping icons */
+    padding-top: 60px; /* Extra space for the overlapping icons */
+    position: relative;
+    z-index: 1;
 }
 
 .skill-card {
     background: var(--card-bg);
     border-radius: 20px;
-    padding: 3.5rem 1.75rem 1.75rem;
-    margin-top: 0; /* Removed - using padding on grid instead */
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Fluid padding adapts to container width */
+    padding: clamp(3rem, 4vw, 3.5rem) clamp(1.5rem, 2.5vw, 1.75rem) clamp(1.5rem, 2vw, 1.75rem);
+    margin-top: 0;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
     position: relative;
     overflow: visible !important;
-    overflow-x: hidden !important;
-    overflow-y: visible !important;
+    /* Auto height ensures cards grow with content */
     height: auto;
-    min-height: 240px;
+    min-height: fit-content;
     max-height: none !important;
+    /* Flexbox ensures content stacks properly when new items are added */
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     box-shadow: var(--shadow-soft-lg);
     border: 1px solid var(--green-accent-border);
+    isolation: isolate;
+    /* Container-based sizing */
+    width: 100%;
+    max-width: 100%;
 }
 
 /* Hide any scrollbars */
@@ -67,18 +74,20 @@
 
 .skill-icon-wrapper {
     position: absolute;
-    top: -45px;
+    top: -50px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10; /* Higher z-index to ensure icon is always on top */
+    z-index: 100;
+    overflow: visible !important;
+    pointer-events: none;
 }
 
 .skill-icon {
-    width: 90px;
-    height: 90px;
+    width: 95px;
+    height: 95px;
     background: linear-gradient(145deg, var(--green-accent), var(--green-accent-hover));
     border-radius: 50%;
     display: flex;
@@ -89,6 +98,8 @@
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 8px 25px rgba(var(--green-accent-rgb), 0.35);
     border: 4px solid rgba(255, 255, 255, 0.9);
+    pointer-events: auto;
+    overflow: visible !important;
 }
 
 [data-theme="dark"] .skill-icon {
@@ -156,6 +167,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex: 1;
+    min-height: 0;
 }
 
 .skill-title {
@@ -164,6 +177,8 @@
     margin-bottom: 0.5rem;
     font-weight: 600;
     text-align: center;
+    word-wrap: break-word;
+    hyphens: auto;
 }
 
 .skill-list {
@@ -171,18 +186,26 @@
     padding: 0;
     margin: 0;
     text-align: center;
+    width: 100%;
+    /* Flexbox column: auto-stacks new list items vertically */
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.25rem, 0.5vw, 0.4rem);
+    /* Ensures list expands naturally with new items */
+    flex: 1 1 auto;
 }
 
 .skill-list li {
     color: var(--text-secondary);
-    margin: 0.4rem 0;
+    margin: 0;
     font-size: 0.95rem;
     transition: all 0.3s ease;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    hyphens: auto;
     position: relative;
     cursor: pointer;
-    padding: 0.35rem 0.75rem;
+    padding: 0.4rem 0.75rem;
     border-radius: 8px;
 }
 
@@ -244,14 +267,21 @@
     background: var(--card-bg);
     border-radius: 20px;
     overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+    /* Height auto with flex ensures card grows with content */
     height: 100%;
+    width: 100%;
+    min-width: 0;
+    /* Flex column ensures all child elements stack vertically */
     display: flex;
     flex-direction: column;
     box-shadow: var(--shadow-soft-lg);
     border: 1px solid rgba(255, 68, 68, 0.08);
     transform: translateY(0);
-    will-change: transform, box-shadow;
+    content-visibility: auto;
+    contain: layout style paint;
+    /* Container-based sizing for responsiveness */
+    container-type: inline-size;
 }
 
 .project-card:hover {
@@ -298,10 +328,11 @@
         rgba(255, 255, 255, 0.03) 75%
     );
     background-size: 200% 100%;
-    animation: imageLoading 1.5s infinite;
+    animation: imageLoading 1.5s ease-in-out infinite;
     z-index: 1;
     opacity: 1;
     transition: opacity 0.3s ease;
+    will-change: background-position;
 }
 
 /* Hide loading state when image is loaded */
@@ -336,9 +367,10 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
-    will-change: transform;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
     opacity: 0;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
 }
 
 /* Show image when loaded */
@@ -351,12 +383,19 @@
 }
 
 .project-content {
-    padding: 1.5rem;
+    /* Fluid padding scales with container */
+    padding: clamp(1.25rem, 2vw, 1.75rem);
+    /* flex-grow allows content to expand */
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    /* Dynamic gap adjusts to screen size */
+    gap: clamp(0.6rem, 1.5vw, 1rem);
     background: var(--project-content-bg);
+    min-height: 0;
+    overflow: visible;
+    /* Ensures new elements are properly spaced */
+    justify-content: space-between;
 }
 
 .project-title {
@@ -365,6 +404,9 @@
     color: var(--text-color);
     margin: 0;
     line-height: 1.4;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 .project-description {
@@ -376,13 +418,17 @@
     overflow-wrap: break-word;
     word-wrap: break-word;
     hyphens: auto;
+    line-height: 1.6;
 }
 
 .project-technologies {
+    /* Flex wrap ensures new tech tags automatically reflow */
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
+    gap: clamp(0.4rem, 1vw, 0.6rem);
+    margin-top: clamp(0.4rem, 0.8vw, 0.6rem);
+    /* Auto-adjusts when new technologies are added */
+    align-items: center;
 }
 
 .project-tech {
@@ -396,7 +442,12 @@
 }
 
 .project-links {
-    margin-top: 1rem;
+    margin-top: auto;
+    padding-top: 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
 /* -------------------- Certification Cards -------------------- */
@@ -407,9 +458,14 @@
     transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease;
     box-shadow: var(--shadow-soft-md);
     border: 1px solid rgba(var(--green-accent-rgb), 0.12);
+    /* Flex column ensures proper stacking of new content */
     display: flex;
     flex-direction: column;
     position: relative;
+    /* Container-based sizing */
+    width: 100%;
+    height: 100%;
+    min-height: fit-content;
 }
 
 /* Verified Badge for Certificates */
@@ -491,12 +547,15 @@
 }
 
 .cert-content {
-    padding: 1.5rem 1.25rem;
+    /* Fluid padding adapts to container */
+    padding: clamp(1.25rem, 2vw, 1.75rem) clamp(1rem, 2vw, 1.5rem);
     background: var(--cert-content-bg);
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    /* Dynamic gap for new content items */
+    gap: clamp(0.5rem, 1vw, 0.75rem);
+    /* Ensures proper spacing when content is added */
 }
 
 .cert-title {
@@ -515,6 +574,7 @@
     display: flex;
     align-items: center;
     gap: 0.4rem;
+    text-align: left;
 }
 
 .cert-issuer::before {

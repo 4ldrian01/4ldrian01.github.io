@@ -97,6 +97,9 @@
 /* Desktop Skills Enhancements */
 @import url('./desktop/desktop-skills.css');
 
+/* Laptop 1024px Specific Optimizations */
+@import url('./desktop/laptop-1024.css');
+
 
 /* ==========================================
    7. UTILITY CLASSES

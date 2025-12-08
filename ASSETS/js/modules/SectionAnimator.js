@@ -22,8 +22,8 @@ export class SectionAnimator {
         this.observer = new IntersectionObserver(
             (entries) => this.handleIntersection(entries),
             {
-                threshold: 0.15,
-                rootMargin: '0px 0px -50px 0px'
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
             }
         );
 
@@ -42,15 +42,20 @@ export class SectionAnimator {
         }
         
         // Define animation configurations with snappier durations
+        // Reduce durations on mobile for better performance
+        const isMobile = window.matchMedia('(max-width: 767px)').matches;
+        const durationMultiplier = isMobile ? 0.7 : 1;
+        const staggerMultiplier = isMobile ? 0.5 : 1;
+        
         const animationConfig = [
-            { selector: 'section[id]:not(#home)', animation: 'fade-up', duration: 500, delay: 0 },
-            { selector: '.section-header', animation: 'fade-down', duration: 400, delay: 50 },
-            { selector: '.skill-card', animation: 'fade-up', duration: 400, delay: 50, stagger: 80 },
-            { selector: '.project-card', animation: 'fade-up', duration: 400, delay: 50, stagger: 80 },
-            { selector: '.cert-card', animation: 'fade-up', duration: 400, delay: 50, stagger: 80 },
-            { selector: '.stat-item', animation: 'fade-up', duration: 350, delay: 0, stagger: 80 },
-            { selector: '.about-content', animation: 'fade-up', duration: 500, delay: 50 },
-            { selector: '.contact-wrapper', animation: 'fade-up', duration: 500, delay: 50 }
+            { selector: 'section[id]:not(#home)', animation: 'fade-up', duration: 400 * durationMultiplier, delay: 0 },
+            { selector: '.section-header', animation: 'fade-down', duration: 350 * durationMultiplier, delay: 30 },
+            { selector: '.skill-card', animation: 'fade-up', duration: 350 * durationMultiplier, delay: 30, stagger: 60 * staggerMultiplier },
+            { selector: '.project-card', animation: 'fade-up', duration: 350 * durationMultiplier, delay: 30, stagger: 60 * staggerMultiplier },
+            { selector: '.cert-card', animation: 'fade-up', duration: 350 * durationMultiplier, delay: 30, stagger: 60 * staggerMultiplier },
+            { selector: '.stat-item', animation: 'fade-up', duration: 300 * durationMultiplier, delay: 0, stagger: 50 * staggerMultiplier },
+            { selector: '.about-content', animation: 'fade-up', duration: 400 * durationMultiplier, delay: 30 },
+            { selector: '.contact-wrapper', animation: 'fade-up', duration: 400 * durationMultiplier, delay: 30 }
         ];
 
         animationConfig.forEach(config => {
@@ -100,21 +105,25 @@ export class SectionAnimator {
         element.style.transitionDelay = `${delay}ms`;
 
         // Use smaller transform values for snappier feel
+        // Even smaller on mobile for better performance
+        const isMobile = window.matchMedia('(max-width: 767px)').matches;
+        const distance = isMobile ? 15 : 20;
+        
         switch (animation) {
             case 'fade-up':
-                element.style.transform = 'translateY(20px)';
+                element.style.transform = `translateY(${distance}px)`;
                 break;
             case 'fade-down':
-                element.style.transform = 'translateY(-20px)';
+                element.style.transform = `translateY(-${distance}px)`;
                 break;
             case 'fade-left':
-                element.style.transform = 'translateX(20px)';
+                element.style.transform = `translateX(${distance}px)`;
                 break;
             case 'fade-right':
-                element.style.transform = 'translateX(-20px)';
+                element.style.transform = `translateX(-${distance}px)`;
                 break;
             default:
-                element.style.transform = 'translateY(15px)';
+                element.style.transform = `translateY(${distance - 5}px)`;
         }
     }
 

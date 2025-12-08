@@ -147,16 +147,26 @@ export class ProjectModal {
      * Attaches listeners to modal elements after creation
      */
     attachModalListeners() {
-        // Close button
+        // Close button with debouncing to prevent double-clicks
         const closeBtn = document.getElementById('modalCloseBtn');
         if (closeBtn) {
-            closeBtn.addEventListener('click', () => this.close());
+            let isClosing = false;
+            closeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (isClosing) return;
+                isClosing = true;
+                this.close();
+                setTimeout(() => { isClosing = false; }, 300);
+            });
         }
 
-        // Click outside to close
+        // Click outside to close (debounced)
+        let isClosingOverlay = false;
         this.overlay.addEventListener('click', (e) => {
-            if (e.target === this.overlay) {
+            if (e.target === this.overlay && !isClosingOverlay) {
+                isClosingOverlay = true;
                 this.close();
+                setTimeout(() => { isClosingOverlay = false; }, 300);
             }
         });
     }
@@ -194,19 +204,23 @@ export class ProjectModal {
         // Store current scroll position BEFORE any changes
         this.previousScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
 
-        // Show modal
-        this.overlay.classList.add('active');
-        
         // Lock body scroll without position:fixed (prevents scroll jump)
         document.documentElement.classList.add('modal-open');
         document.body.classList.add('modal-open');
         document.body.style.overflow = 'hidden';
         document.body.style.paddingRight = this.getScrollbarWidth() + 'px';
         
+        // Use requestAnimationFrame for smooth animation start
+        requestAnimationFrame(() => {
+            this.overlay.classList.add('active');
+        });
+        
         this.isOpen = true;
 
-        // Focus trap for accessibility
-        this.modal.focus();
+        // Focus trap for accessibility (delay slightly for animation)
+        setTimeout(() => {
+            this.modal?.focus();
+        }, 50);
     }
 
     /**
@@ -260,18 +274,24 @@ export class ProjectModal {
     }
 
     /**
-     * Closes the modal
+     * Closes the modal with optimized performance
      */
     close() {
         if (!this.isOpen) return;
         
-        this.overlay.classList.remove('active');
-        document.documentElement.classList.remove('modal-open');
-        document.body.classList.remove('modal-open');
-        document.body.style.overflow = '';
-        document.body.style.paddingRight = '';
+        // Use requestAnimationFrame for smooth animation
+        requestAnimationFrame(() => {
+            this.overlay.classList.remove('active');
+            
+            // Wait for animation to complete before removing body classes
+            setTimeout(() => {
+                document.documentElement.classList.remove('modal-open');
+                document.body.classList.remove('modal-open');
+                document.body.style.overflow = '';
+                document.body.style.paddingRight = '';
+            }, 200); // Match CSS transition duration
+        });
         
-        // No need to restore scroll - we didn't move it
         this.isOpen = false;
     }
 

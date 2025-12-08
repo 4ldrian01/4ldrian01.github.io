@@ -59,7 +59,6 @@ export class PortfolioFilter {
             card.style.opacity = '1';
             card.style.transition = `opacity ${this.animationDuration}ms cubic-bezier(0.4, 0, 0.2, 1), 
                                    transform ${this.animationDuration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
-            card.style.willChange = 'transform, opacity';
             card.style.backfaceVisibility = 'hidden';
         });
 
@@ -70,6 +69,16 @@ export class PortfolioFilter {
         
         // Initial check to set button state
         this.performFilter('all');
+    }
+
+    /**
+     * Temporarily add will-change during animation for better performance
+     * Remove after animation completes to free up resources
+     */
+    optimizeAnimation(cards, enable = true) {
+        cards.forEach(card => {
+            card.style.willChange = enable ? 'transform, opacity' : 'auto';
+        });
     }
 
     updateActiveButton(clickedButton) {

@@ -227,6 +227,10 @@ class PortfolioApp {
         
         if (!toggleBtn || !skillsList) return;
 
+        // Cache child elements
+        const toggleText = toggleBtn.querySelector('.toggle-text');
+        const icon = toggleBtn.querySelector('i');
+
         /**
          * Helper function to set expanded state
          * @param {boolean} expanded - Whether list should be expanded
@@ -234,9 +238,6 @@ class PortfolioApp {
         const setExpanded = (expanded) => {
             toggleBtn.setAttribute('aria-expanded', String(expanded));
             skillsList.classList.toggle('expanded', expanded);
-            
-            const toggleText = toggleBtn.querySelector('.toggle-text');
-            const icon = toggleBtn.querySelector('i');
             
             if (toggleText) {
                 toggleText.textContent = expanded ? 'Show Less' : 'Show More';
@@ -260,18 +261,25 @@ class PortfolioApp {
             setExpanded(!isExpanded);
         });
 
-        // Handle responsive behavior on resize
-        window.addEventListener('resize', () => {
-            if (window.matchMedia('(min-width: 1024px)').matches) {
-                skillsList.classList.add('expanded');
-            } else {
-                // Keep collapsed on mobile unless user has expanded
-                const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-                if (!isExpanded) {
-                    skillsList.classList.remove('expanded');
+        // Debounced resize handler
+        let resizeTimeout;
+        const handleResize = () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                if (window.matchMedia('(min-width: 1024px)').matches) {
+                    skillsList.classList.add('expanded');
+                } else {
+                    // Keep collapsed on mobile unless user has expanded
+                    const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+                    if (!isExpanded) {
+                        skillsList.classList.remove('expanded');
+                    }
                 }
-            }
-        });
+            }, 150);
+        };
+
+        // Handle responsive behavior on resize
+        window.addEventListener('resize', handleResize, { passive: true });
     }
 
     /**
