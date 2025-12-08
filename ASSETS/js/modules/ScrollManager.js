@@ -28,9 +28,12 @@ export class ScrollManager {
         this.navLinks = document.querySelectorAll('.nav-link');
         this.mobileNavLinks = document.querySelectorAll('.mobile-menu__link');
 
+        // Debounced resize handler
+        this.debouncedResize = this.debounce(this.boundHandleResize, 150);
+
         // Set up scroll/resize listeners for sticky header only
         window.addEventListener('scroll', this.boundHandleScroll, { passive: true });
-        window.addEventListener('resize', this.boundHandleResize);
+        window.addEventListener('resize', this.debouncedResize, { passive: true });
 
         // Listen for hash changes (browser back/forward, manual URL change)
         window.addEventListener('hashchange', () => this.handleHashChange(), false);
@@ -66,6 +69,18 @@ export class ScrollManager {
 
     handleResize() {
         this.updateStickyHeader();
+    }
+
+    debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
     }
 
     updateStickyHeader() {
@@ -127,7 +142,7 @@ export class ScrollManager {
             // Adjust root margin to account for header height
             // Center zone: when section is roughly in the middle third of viewport
             rootMargin: '-20% 0px -60% 0px',
-            threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+            threshold: [0, 0.25, 0.5, 0.75]
         });
 
         this.sections.forEach(section => this.sectionObserver.observe(section));
@@ -174,7 +189,18 @@ export class ScrollManager {
             return;
         }
 
-        this.activeSection = href.substring(1);
+        // Prevent default anchor behavior to avoid jiggly scroll
+        event.preventDefault();
+
+        const sectionId = href.substring(1);
+        const targetSection = document.getElementById(sectionId);
+        
+        if (!targetSection) {
+            return;
+        }
+
+        // Update active section immediately
+        this.activeSection = sectionId;
         this.updateActiveNav();
         
         // Disable observer during manual navigation
@@ -184,6 +210,27 @@ export class ScrollManager {
         if (this.scrollTimeout) {
             clearTimeout(this.scrollTimeout);
         }
+        
+        // Perform smooth scroll with proper offset calculation
+        const scrollToSection = () => {
+            // Get header height dynamically for responsive design
+            const headerOffset = this.header ? this.header.offsetHeight + 20 : 100;
+            const elementPosition = targetSection.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: Math.max(0, offsetPosition),
+                behavior: 'smooth'
+            });
+            
+            // Update URL hash without triggering hashchange event
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, href);
+            }
+        };
+
+        // Execute scroll immediately
+        requestAnimationFrame(scrollToSection);
         
         // Re-enable observer after scroll animation completes
         this.scrollTimeout = setTimeout(() => {

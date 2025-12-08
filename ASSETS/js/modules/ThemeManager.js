@@ -72,8 +72,9 @@ export class ThemeManager {
             return 'dark';
         }
 
-        // Treat devices <= 1023px width as tablet/mobile
-        const prefersMobileLayout = window.matchMedia('(max-width: 1023px)').matches;
-        return prefersMobileLayout ? 'light' : 'dark';
+        // Desktop/Laptop (>=1024px) = Dark theme
+        // Tablet/Mobile (<=1023px) = Light theme
+        const isDesktopOrLaptop = window.matchMedia('(min-width: 1024px)').matches;
+        return isDesktopOrLaptop ? 'dark' : 'light';
     }
 }

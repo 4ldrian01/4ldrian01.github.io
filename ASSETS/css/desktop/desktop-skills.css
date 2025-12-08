@@ -9,12 +9,17 @@
 @media (min-width: 1024px) {
     .skills-grid {
         overflow: visible !important;
-        padding-top: 55px;
+        padding-top: 65px;
+        position: relative;
+    }
+    
+    .skill-card {
+        overflow: visible !important;
     }
     
     .skill-icon-wrapper {
-        overflow: visible;
-        z-index: 10;
+        overflow: visible !important;
+        z-index: 100;
     }
 
     /* Subtle left-to-right hover effect on icon */

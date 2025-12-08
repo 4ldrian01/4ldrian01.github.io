@@ -11,7 +11,7 @@
     <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
     
     <!-- Primary Meta Tags -->
-    <title>Aldrian Muksan Sahid | IT Student & Aspiring Network Engineer Portfolio</title>
+    <title>Aldrian. - Portfolio</title>
     <meta name="title" content="Aldrian Muksan Sahid | IT Student & Aspiring Network Engineer Portfolio">
     <meta name="description" content="Portfolio of Aldrian Muksan Sahid - 3rd year BS IT student at Western Mindanao State University. Passionate about web development, IT networking, cybersecurity, and innovative solutions. View projects, skills, and certifications.">
     <meta name="keywords" content="Aldrian Sahid, Web Developer, IT Networking, Cybersecurity, IT Student, WMSU, Network Engineer, Portfolio, System Administrator, Programming, Zamboanga">
@@ -46,10 +46,12 @@
     <!-- Preload critical assets -->
     <link rel="preload" href="ASSETS/css/main.css?v=1.1" as="style">
     <link rel="preload" href="images/ALDRIAN-MAIN-IMG.png" as="image">
+    <link rel="preload" href="ASSETS/js/main.js" as="script" crossorigin="anonymous">
 
     <!-- Fonts - Using display=swap for better performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
 
     <!-- Font Awesome - Load synchronously for mobile compatibility -->
@@ -422,8 +424,8 @@
 
             <div class="portfolio-container">
                 <div class="portfolio-rows">
-                    <div class="portfolio-row" id="portfolioRow1">
-                        <!-- First Row -->
+                    <div class="portfolio-row">
+                        <!-- All Projects in Single Container for 2-per-row Grid -->
                         <div class="project-card" data-category="web">
                             <div class="project-category"><i class="fas fa-globe"></i> Web Development</div>
                             <div class="project-img-container">
@@ -487,10 +489,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="portfolio-row" id="portfolioRow2">
-                        <!-- Second Row -->
                         <div class="project-card" data-category="python">
                             <div class="project-category"><i class="fab fa-python"></i> Python</div>
                             <div class="project-img-container">
@@ -614,9 +613,7 @@
                                 <p class="cert-date">Date Earned: Month Year</p>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="cert-row" id="certRow2">
                         <!-- Certificate 4 -->
                         <div class="cert-card">
                             <div class="cert-image-container">
@@ -630,7 +627,36 @@
                             </div>
                         </div>
 
-                        <!-- Certificate 5 -->
+                        <!-- Certificate 5 (desktop-first) -->
+                        <div class="cert-card desktop-only-card">
+                            <div class="cert-image-container">
+                                <img src="images/cert-placeholder.jpg" alt="Certificate 5" class="cert-image"
+                                    loading="lazy">
+                            </div>
+                            <div class="cert-content">
+                                <h3 class="cert-title">Certificate Title 5</h3>
+                                <p class="cert-issuer">Issuing Organization</p>
+                                <p class="cert-date">Date Earned: Month Year</p>
+                            </div>
+                        </div>
+
+                        <!-- Certificate 6 (desktop-first) -->
+                        <div class="cert-card desktop-only-card">
+                            <div class="cert-image-container">
+                                <img src="images/cert-placeholder.jpg" alt="Certificate 6" class="cert-image"
+                                    loading="lazy">
+                            </div>
+                            <div class="cert-content">
+                                <h3 class="cert-title">Certificate Title 6</h3>
+                                <p class="cert-issuer">Issuing Organization</p>
+                                <p class="cert-date">Date Earned: Month Year</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="cert-row" id="certRow2">
+                        <!-- Certificate 5 (mobile/all screens base) -->
                         <div class="cert-card">
                             <div class="cert-image-container">
                                 <img src="images/cert-placeholder.jpg" alt="Certificate 5" class="cert-image"
@@ -643,7 +669,7 @@
                             </div>
                         </div>
 
-                        <!-- Certificate 6 -->
+                        <!-- Certificate 6 (mobile/all screens base) -->
                         <div class="cert-card">
                             <div class="cert-image-container">
                                 <img src="images/cert-placeholder.jpg" alt="Certificate 6" class="cert-image"
@@ -655,6 +681,35 @@
                                 <p class="cert-date">Date Earned: Month Year</p>
                             </div>
                         </div>
+
+                        <!-- Certificate 7 -->
+                        <div class="cert-card">
+                            <div class="cert-image-container">
+                                <img src="images/cert-placeholder.jpg" alt="Certificate 7" class="cert-image"
+                                    loading="lazy">
+                            </div>
+                            <div class="cert-content">
+                                <h3 class="cert-title">Certificate Title 7</h3>
+                                <p class="cert-issuer">Issuing Organization</p>
+                                <p class="cert-date">Date Earned: Month Year</p>
+                            </div>
+                        </div>
+
+                        <!-- Certificate 8 -->
+                        <div class="cert-card">
+                            <div class="cert-image-container">
+                                <img src="images/cert-placeholder.jpg" alt="Certificate 8" class="cert-image"
+                                    loading="lazy">
+                            </div>
+                            <div class="cert-content">
+                                <h3 class="cert-title">Certificate Title 8</h3>
+                                <p class="cert-issuer">Issuing Organization</p>
+                                <p class="cert-date">Date Earned: Month Year</p>
+                            </div>
+                        </div>
+
+                        <!-- Placeholder for Certificate 9-12 (Desktop shows 6 per screen, Laptop/Tablet shows 4) -->
+                        <!-- Add new certificates here to maintain the 6-card-per-screen pattern on desktop -->
                     </div>
                 </div>
                 <button class="cert-nav-btn prev-btn" id="prevCert" aria-label="Previous certificates">
@@ -701,7 +756,7 @@
                                     aria-describedby="nameHint nameError" 
                                     aria-required="true"
                                     autocomplete="name">
-                                <span class="input-hint" id="nameHint">Enter your full name as you'd like to be addressed</span>
+                                
                                 <span class="error-message" id="nameError" role="alert" aria-live="polite"></span>
                             </div>
                             <div class="input-group">
@@ -711,7 +766,7 @@
                                     aria-describedby="emailHint emailError" 
                                     aria-required="true"
                                     autocomplete="email">
-                                <span class="input-hint" id="emailHint">I'll use this to respond to your message</span>
+                                
                                 <span class="error-message" id="emailError" role="alert" aria-live="polite"></span>
                             </div>
                         </div>
@@ -721,7 +776,7 @@
                                 placeholder="e.g., Project Collaboration, Job Opportunity, General Inquiry" 
                                 aria-describedby="subjectHint subjectError" 
                                 aria-required="true">
-                            <span class="input-hint" id="subjectHint">Brief topic of your message</span>
+                    
                             <span class="error-message" id="subjectError" role="alert" aria-live="polite"></span>
                         </div>
                         <div class="input-group">
@@ -730,7 +785,7 @@
                                 placeholder="Hi Aldrian! I'd like to discuss..." 
                                 aria-describedby="messageHint messageError" 
                                 aria-required="true"></textarea>
-                            <span class="input-hint" id="messageHint">Share details about your project, question, or opportunity</span>
+                            
                             <span class="error-message" id="messageError" role="alert" aria-live="polite"></span>
                         </div>
                         <div class="form-status" id="formStatus" role="status" aria-live="polite" aria-atomic="true"></div>

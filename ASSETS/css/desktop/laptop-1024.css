@@ -1,0 +1,232 @@
+/* ============================================
+   LAPTOP 1024PX - Specific Optimizations
+   ============================================
+   Dedicated breakpoint for 1024px laptop displays
+   Ensures perfect layout at exactly 1024px width
+   ============================================ */
+
+/* -------------------- 1024px Laptop Breakpoint -------------------- */
+@media (min-width: 1024px) and (max-width: 1279px) {
+    
+    /* -------------------- Container & Spacing -------------------- */
+    .container {
+        max-width: 95%;
+        padding: 0 3rem;
+    }
+    
+    section {
+        padding: 80px 6% !important;
+    }
+    
+    /* -------------------- Header -------------------- */
+    header {
+        padding: 18px 6%;
+    }
+    
+    /* -------------------- Hero Section -------------------- */
+    .hero {
+        padding: 0 6%;
+        gap: 2.5rem;
+    }
+    
+    .profile-frame {
+        width: clamp(320px, 35vw, 380px);
+        height: clamp(320px, 35vw, 380px);
+    }
+    
+    /* -------------------- Stats Section -------------------- */
+    .stats-section {
+        margin-top: -80px;
+        padding: 0 6%;
+    }
+    
+    .stats-container {
+        /* Dynamic auto-fit ensures stats reflow properly at 1024px */
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1.75rem;
+        max-width: 95%;
+        padding: 2rem 1.75rem;
+    }
+    
+    .stat-number {
+        font-size: clamp(1.75rem, 3vw, 2rem);
+    }
+    
+    .stat-label {
+        font-size: clamp(0.9rem, 1.5vw, 1rem);
+    }
+    
+    /* -------------------- About Section -------------------- */
+    #about {
+        padding: 80px 6% !important;
+    }
+    
+    .about-content.flex-container {
+        gap: 2.5rem;
+        max-width: 92%;
+    }
+    
+    .about-image-container {
+        flex: 0 1 42%;
+        max-width: 380px;
+    }
+    
+    .text-content {
+        flex: 1 1 55%;
+    }
+    
+    .personal-info {
+        max-width: 90%;
+    }
+    
+    /* -------------------- Skills Section -------------------- */
+    #skills {
+        padding: 80px 6% !important;
+    }
+    
+    .skills-container {
+        max-width: 95%;
+        padding: 1.5rem 0.75rem;
+    }
+    
+    .skills-grid {
+        /* Dynamic 3-column layout for skills at 1024px */
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        max-width: 100%;
+    }
+    
+    /* Soft Skills */
+    .soft-skills-list {
+        max-width: 88%;
+        gap: 0.75rem;
+    }
+    
+    .soft-skill-chip {
+        padding: 0.65rem 1.2rem;
+        font-size: clamp(0.9rem, 1.5vw, 0.95rem);
+    }
+    
+    /* -------------------- Portfolio Section -------------------- */
+    #portfolio {
+        padding: 80px 6% !important;
+    }
+    
+    .portfolio-container {
+        max-width: 95%;
+    }
+    
+    .portfolio-row {
+        /* Dynamic 2-3 column layout based on content */
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+    
+    .project-categories {
+        max-width: 92%;
+        gap: 0.75rem;
+    }
+    
+    /* -------------------- Certifications Section -------------------- */
+    .certifications {
+        padding: 80px 6% !important;
+    }
+    
+    .certifications-container {
+        max-width: 95%;
+        padding: 0 65px;
+    }
+    
+    .cert-rows {
+        min-height: 480px;
+    }
+    
+    .cert-row {
+        /* Dynamic 2-3 column grid for certificates */
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+        gap: 2rem;
+    }
+    
+    /* -------------------- Contact Section -------------------- */
+    #contact {
+        padding: 80px 6% !important;
+    }
+    
+    .contact-wrapper {
+        grid-template-columns: 1.15fr 0.95fr;
+        gap: 2.25rem;
+        max-width: 92%;
+    }
+    
+    .contact-group {
+        padding: 1.5rem 1.75rem;
+    }
+    
+    .social-links {
+        grid-template-columns: repeat(auto-fit, minmax(48px, 1fr));
+        gap: 0.75rem;
+        max-width: 300px;
+    }
+    
+    /* -------------------- Section Headers -------------------- */
+    .section-title {
+        font-size: clamp(2rem, 4vw, 2.25rem);
+    }
+    
+    .section-subtitle {
+        font-size: clamp(1rem, 2vw, 1.15rem);
+    }
+    
+    /* -------------------- Cards at 1024px -------------------- */
+    .skill-card {
+        padding: 3.25rem 1.5rem 1.5rem;
+    }
+    
+    .project-card {
+        max-width: 100%;
+    }
+    
+    .cert-card {
+        max-width: 100%;
+    }
+    
+    /* -------------------- Typography -------------------- */
+    .text-paragraph {
+        font-size: clamp(0.95rem, 1.5vw, 1rem);
+        line-height: 1.65;
+    }
+    
+    /* -------------------- Buttons -------------------- */
+    .btn {
+        padding: clamp(0.65rem, 1.5vw, 0.75rem) clamp(1.25rem, 2vw, 1.5rem);
+        font-size: clamp(0.9rem, 1.5vw, 0.95rem);
+    }
+    
+    /* -------------------- Performance Optimizations -------------------- */
+    /* Ensure smooth scrolling and rendering at 1024px */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    section {
+        contain-intrinsic-size: auto 700px;
+    }
+    
+    /* -------------------- Grid Auto-Fit Refinements -------------------- */
+    /* Ensure all grids scale properly at 1024px */
+    [class*="grid"] {
+        grid-auto-flow: dense;
+        align-items: start;
+    }
+    
+    /* -------------------- Flex Container Refinements -------------------- */
+    /* Ensure all flex containers wrap properly */
+    [class*="flex"] {
+        flex-wrap: wrap;
+        gap: clamp(1rem, 2vw, 1.75rem);
+    }
+}
+
+/* =====================================
+   END 1024px LAPTOP OPTIMIZATIONS
+   ===================================== */

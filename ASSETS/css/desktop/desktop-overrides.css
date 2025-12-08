@@ -39,8 +39,10 @@
     }
 
     .stats-container {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 25px;
+        /* Dynamic auto-fit creates columns based on available space */
+        grid-template-columns: repeat(auto-fit, minmax(clamp(180px, 18vw, 220px), 1fr));
+        gap: clamp(20px, 2.5vw, 30px);
+        /* Ensures new stats automatically fit in layout */
     }
 
     .stat-item {
@@ -81,19 +83,70 @@
     }
 
     .section-subtitle {
-        font-size: 1.375rem;
+        font-size: 1.25rem;
+    }
+    
+    /* Center all section headers for laptop 1024px view */
+    .section-header {
+        text-align: center !important;
+        margin: 0 auto 50px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .section-title {
+        text-align: center !important;
+        margin: 0 auto 20px;
+    }
+    
+    .section-subtitle {
+        text-align: center !important;
+    }
+    
+    /* Ensure all main sections have centered headers */
+    #about .section-header,
+    #skills .section-header,
+    #portfolio .section-header,
+    #certifications .section-header,
+    #contact .section-header {
+        text-align: center !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    #about .section-title,
+    #skills .section-title,
+    #portfolio .section-title,
+    #certifications .section-title,
+    #contact .section-title {
+        text-align: center !important;
     }
 
     /* Skills Section */
     #skills {
-        padding: 100px 8%;
+        padding: 80px 8%;
     }
 
     .skills-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 35px;
+        /* auto-fit allows dynamic column creation based on available space */
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: clamp(25px, 3vw, 35px);
         overflow: visible !important;
         padding-top: 55px;
+        /* Maximum 4 columns on large screens */
+        max-width: 100%;
+    }
+    
+    /* Force 4-column on very large desktops */
+    @media (min-width: 1440px) {
+        .skills-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
     }
 
     .skill-card {
@@ -107,8 +160,18 @@
     }
 
     .portfolio-row {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
+        /* auto-fit creates dynamic columns for new projects */
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: clamp(1.75rem, 2.5vw, 2.5rem);
+        /* Ensures proper alignment with new projects */
+        justify-items: center;
+    }
+    
+    /* Cap at 3 columns on large desktops */
+    @media (min-width: 1440px) {
+        .portfolio-row {
+            grid-template-columns: repeat(3, 1fr);
+        }
     }
     
     .portfolio-container {
@@ -120,14 +183,113 @@
         padding-top: 65%;
     }
 
-    /* Certifications Section */
+    /* Certifications Section - Desktop ≥1280: Show 6 certs (3x2) per slide */
     .certifications {
         padding: 120px 8%;
     }
+    
+    .cert-rows {
+        min-height: 520px;
+        overflow: visible;
+        position: relative;
+    }
 
     .cert-row {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
+        display: grid !important;
+        /* auto-fit allows dynamic columns for certificates */
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: clamp(1.5rem, 2.5vw, 2.5rem);
+        position: absolute;
+        width: 100%;
+        transition: opacity 0.4s ease, transform 0.4s ease;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(40px);
+        /* Ensures new certificates align properly */
+        align-items: start;
+    }
+    
+    /* Force 3 columns on large desktops */
+    @media (min-width: 1440px) {
+        .cert-row {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    
+    /* Show only active row with 6 certifications (3x2 grid) */
+    .cert-row.active {
+        position: relative !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateX(0) !important;
+    }
+    
+    .cert-row:not(.active) {
+        position: absolute !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+    
+    /* Ensure each row shows exactly 6 cards in 3x2 layout */
+    .cert-row .cert-card {
+        display: flex;
+        width: 100%;
+    }
+    
+    /* Hide base cards 5-6 in row2 on desktop (desktop-only-card versions in row1 are shown) */
+    .cert-row#certRow2 .cert-card:nth-child(1),
+    .cert-row#certRow2 .cert-card:nth-child(2) {
+        display: none !important;
+    }
+    
+    .certifications-container {
+        padding: 0 85px;
+        position: relative;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+    
+    .cert-nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 20;
+        width: 56px;
+        height: 56px;
+        background: var(--card-bg);
+        border: 2px solid var(--primary-color);
+        border-radius: 50%;
+        color: var(--primary-color);
+        font-size: 1.35rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .cert-nav-btn:hover:not(:disabled) {
+        background: var(--primary-color);
+        color: white;
+        transform: translateY(-50%) scale(1.12);
+        box-shadow: 0 6px 20px rgba(255, 68, 68, 0.4);
+    }
+    
+    .cert-nav-btn:disabled {
+        opacity: 0.25;
+        cursor: not-allowed;
+        border-color: var(--text-secondary);
+        color: var(--text-secondary);
+    }
+    
+    .cert-nav-btn.prev-btn {
+        left: 10px;
+    }
+    
+    .cert-nav-btn.next-btn {
+        right: 10px;
     }
 
     /* Contact Section */
@@ -154,27 +316,85 @@
     header {
         padding: 20px 8%;
     }
+    
+    /* Navigation - Optimized spacing for laptop */
+    nav ul {
+        gap: 1.1rem;
+    }
+    
+    nav ul li a {
+        font-size: 0.88rem;
+        padding: 8px 5px;
+        letter-spacing: 0.6px;
+    }
 
-    /* Hero Section */
+    /* Hero Section - Elegant Modern Layout */
     .hero-section {
-        padding: 4rem 0;
+        padding: 3.5rem 0;
     }
 
     .hero {
-        padding: 0 8%;
+        padding: 0 6%;
+        gap: 2.5rem;
+        min-height: calc(100vh - var(--header-height));
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .hero-left {
         text-align: left;
+        max-width: 520px;
+        flex: 1;
+        padding: calc(var(--header-height) + 1.5rem) 0;
+    }
+    
+    .hero-content {
+        max-width: 100%;
+    }
+    
+    .hero-title {
+        font-size: clamp(32px, 4.2vw, 42px);
+        margin-bottom: 1.2rem;
+        line-height: 1.15;
+    }
+    
+    .hero-subtitle {
+        font-size: clamp(0.92rem, 1.05vw, 1.05rem);
+        margin-bottom: 1.8rem;
+        max-width: 90%;
+        line-height: 1.6;
+    }
+    
+    .hero-intro {
+        font-size: clamp(0.88rem, 1vw, 0.98rem);
+        max-width: 90%;
     }
 
     .hero-right {
         margin-top: 0;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: calc(var(--header-height) + 1.5rem) 0;
     }
 
     .profile-frame {
-        width: 350px;
-        height: 350px;
+        width: 340px;
+        height: 340px;
+        border-radius: 50%;
+    }
+    
+    .btn-container {
+        gap: 0.85rem;
+        margin-top: 1.5rem;
+    }
+    
+    .hero .btn {
+        padding: 11px 24px;
+        font-size: 0.92rem;
+        min-height: 44px;
     }
 
     /* Stats Section */
@@ -200,32 +420,106 @@
         font-size: 1.125rem;
     }
 
-    /* About Section */
+    /* About Section - Image Left, Text Right */
     #about {
-        padding: 100px 8%;
+        padding: 90px 6%;
     }
 
     .about-content.flex-container {
         display: flex;
+        flex-direction: row;
         justify-content: space-between;
         align-items: center;
         gap: 3rem;
+        max-width: 1200px;
+        margin: 0 auto;
     }
 
     .about-image-container {
-        max-width: 35%;
+        order: 1;
+        flex: 0 0 38%;
+        max-width: 38%;
+        border-radius: 16px;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .about-image {
+        border-radius: 16px;
+        transition: transform 0.4s ease;
+    }
+    
+    .about-image-container:hover .about-image {
+        transform: scale(1.03);
     }
 
     .text-content {
-        max-width: 60%;
+        order: 2;
+        flex: 1;
+        max-width: 58%;
+        padding-left: 1rem;
+    }
+    
+    .text-paragraph {
+        font-size: 1rem;
+        line-height: 1.72;
+        margin-bottom: 1.25rem;
+    }
+    
+    /* Center section headings for laptop view (1024-1279px) */
+    .section-header {
+        text-align: center !important;
+        margin: 0 auto 50px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .section-title {
+        text-align: center !important;
+        margin: 0 auto 20px;
         font-size: 2.25rem;
     }
 
     .section-subtitle {
+        text-align: center !important;
         font-size: 1.25rem;
+    }
+    
+    /* About Section - Image Left, Text Right */
+    .about-image-container {
+        order: 1;
+        flex: 0 0 38%;
+        max-width: 38%;
+        border-radius: 16px;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .about-image {
+        border-radius: 16px;
+        transition: transform 0.4s ease;
+    }
+    
+    .about-image-container:hover .about-image {
+        transform: scale(1.03);
+    }
+
+    .text-content {
+        order: 2;
+        flex: 1;
+        max-width: 58%;
+        padding-left: 1rem;
+    }
+    
+    .text-paragraph {
+        font-size: 1rem;
+        line-height: 1.72;
+        margin-bottom: 1.25rem;
+    }
+    
+    .section-header {
+        text-align: left;
     }
 
     /* Skills Section */
@@ -251,7 +545,7 @@
 
     /* Portfolio Section */
     #portfolio {
-        padding: 80px 6%;
+        padding: 80px 6% 60px;
     }
     
     /* Filter buttons - no scrollbar, wrap to fit */
@@ -284,77 +578,106 @@
     .category-btn i {
         font-size: 0.9em;
     }
-    
-    .portfolio-container {
-        padding: 1rem 0;
-    }
-    
-    .portfolio-rows {
-        gap: 1.5rem;
-    }
-
-    .portfolio-row {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 1.5rem;
-    }
 
     .project-img-container {
         padding-top: 60%;
     }
 
-    /* Certifications Section */
-    .certifications {
-        padding: 100px 8%;
-    }
+    /* Certifications Section - Laptop (1024-1279px): Show 4 certs (2x2) with nav */
+        .certifications {
+            padding: 90px 6%;
+        }
     
-    .cert-rows {
-        min-height: 380px;
-        overflow: visible;
-    }
+        .cert-rows {
+            min-height: 450px;
+            overflow: visible;
+            position: relative;
+        }
 
-    .cert-row {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-        position: relative;
-    }
+        .cert-row {
+            display: grid !important;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.75rem;
+            position: absolute;
+            width: 100%;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(30px);
+        }
     
-    /* Hide non-active cert rows on laptop - only show active row with 2 cards */
-    .cert-row:not(.active) {
-        display: none !important;
-        position: absolute !important;
-        opacity: 0 !important;
-        visibility: hidden !important;
-    }
+        /* Show only active row with 4 certifications (2x2 grid) */
+        .cert-row.active {
+            position: relative !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            transform: translateX(0) !important;
+        }
     
-    .cert-row.active {
-        display: grid !important;
-        position: relative !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
+        .cert-row:not(.active) {
+            position: absolute !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
     
-    .certifications-container {
-        padding: 0 70px;
-        position: relative;
-    }
+        /* Ensure each row shows exactly 4 cards in 2x2 layout */
+        .cert-row .cert-card {
+            display: flex;
+            width: 100%;
+        }
+
+        /* Hide only desktop-first extras on laptop - show all base cards */
+        .cert-row .desktop-only-card {
+            display: none !important;
+        }
     
-    .cert-nav-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 10;
-        width: 50px;
-        height: 50px;
-    }
+        .certifications-container {
+            padding: 0 75px;
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
     
-    .cert-nav-btn.prev-btn {
-        left: 5px;
-    }
+        .cert-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 15;
+            width: 52px;
+            height: 52px;
+            background: var(--card-bg);
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            color: var(--primary-color);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     
-    .cert-nav-btn.next-btn {
-        right: 5px;
-    }
+        .cert-nav-btn:hover:not(:disabled) {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+    
+        .cert-nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            border-color: var(--text-secondary);
+            color: var(--text-secondary);
+        }
+    
+        .cert-nav-btn.prev-btn {
+            left: 8px;
+        }
+    
+        .cert-nav-btn.next-btn {
+            right: 8px;
+        }
 
     /* Contact Section */
     #contact {

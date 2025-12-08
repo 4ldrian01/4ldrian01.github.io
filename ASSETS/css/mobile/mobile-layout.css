@@ -136,12 +136,81 @@
 
     .stats-container {
         display: grid;
+        /* Modern 2-column layout for all mobile sizes */
         grid-template-columns: repeat(2, 1fr);
-        gap: 0.75rem;
-        padding: 1.5rem 1rem;
+        gap: clamp(0.75rem, 2.5vw, 1rem);
+        padding: clamp(1.5rem, 4vw, 2rem) clamp(1rem, 3vw, 1.5rem);
         background: var(--stats-surface-bg);
         border-radius: 16px;
         box-shadow: 0 8px 24px rgba(12, 20, 30, 0.08);
+    }
+    
+    /* Small mobile (320-374px): Compact 2-column */
+    @media (max-width: 374px) {
+        .stats-container {
+            gap: 0.65rem;
+            padding: 1.25rem 0.85rem;
+        }
+        
+        .stat-item {
+            padding: 1rem 0.75rem;
+        }
+    }
+    
+    /* Medium mobile (375-479px): Balanced 2-column */
+    @media (min-width: 375px) and (max-width: 479px) {
+        .stats-container {
+            gap: 0.85rem;
+            padding: 1.5rem 1rem;
+        }
+        
+        .stat-item {
+            padding: 1.25rem 1rem;
+        }
+    }
+    
+    /* Large mobile (480-767px): Spacious 2-column */
+    @media (min-width: 480px) and (max-width: 767px) {
+        .stats-container {
+            gap: 1rem;
+            padding: 1.75rem 1.25rem;
+        }
+        
+        .stat-item {
+            padding: 1.5rem 1.25rem;
+        }
+    }
+    
+    /* Modern stat item styling for mobile */
+    .stat-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.5rem;
+    }
+    
+    .stat-icon {
+        width: clamp(48px, 12vw, 60px);
+        height: clamp(48px, 12vw, 60px);
+        margin-bottom: 0.25rem;
+    }
+    
+    .stat-svg {
+        width: clamp(28px, 7vw, 35px);
+        height: clamp(28px, 7vw, 35px);
+    }
+    
+    .stat-number {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+        font-weight: 700;
+        line-height: 1.1;
+    }
+    
+    .stat-label {
+        font-size: clamp(0.75rem, 2.2vw, 0.9rem);
+        line-height: 1.3;
+        opacity: 0.9;
     }
 
     /* -------------------- Mobile About Section -------------------- */
@@ -155,14 +224,16 @@
     }
 
     .about-content.flex-container {
+        /* Flex column ensures vertical stacking on mobile */
         flex-direction: column;
         align-items: center;
-        gap: 2rem;
+        gap: clamp(1.5rem, 4vw, 2.5rem);
         text-align: left;
         width: 100%;
         padding: 0;
         max-width: 100%;
         overflow: visible;
+        /* Ensures content grows with new elements */
     }
 
     .about-image-container {
@@ -201,8 +272,16 @@
     }
 
     .interests-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.5rem;
+        /* auto-fit allows new interests to automatically create columns */
+        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+        gap: clamp(0.4rem, 1.5vw, 0.65rem);
+    }
+    
+    /* Large mobile: Allow up to 4 columns */
+    @media (min-width: 480px) and (max-width: 767px) {
+        .interests-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
     }
 
     .interest-item {
@@ -252,8 +331,17 @@
 
     .personal-info dl {
         display: grid;
+        /* Single column on small mobile, can expand on larger mobiles */
         grid-template-columns: 1fr;
-        gap: 6px;
+        gap: clamp(6px, 1.5vw, 10px);
+    }
+    
+    /* Medium to large mobile: Use 2-column layout for better use of space */
+    @media (min-width: 480px) and (max-width: 767px) {
+        .personal-info dl {
+            grid-template-columns: auto 1fr;
+            gap: 10px 16px;
+        }
     }
 
     .personal-info dt {
@@ -270,6 +358,7 @@
     /* -------------------- Mobile Skills Section -------------------- */
     #skills {
         padding: 50px 4%;
+        overflow: visible;
     }
 
     .skills-grid {
@@ -279,12 +368,24 @@
         max-width: 500px;
         margin: 0.6rem auto 0;
         overflow: visible !important;
-        padding-top: 45px;
+        padding-top: 55px;
+        position: relative;
+        z-index: 1;
     }
     
     .skill-card {
         width: 100%;
         margin: 0 auto;
+        overflow: visible !important;
+        min-height: fit-content;
+    }
+    
+    .skill-icon-wrapper {
+        overflow: visible !important;
+        z-index: 100;
+    }
+    
+    .skill-icon {
         overflow: visible !important;
     }
 
@@ -308,21 +409,21 @@
     .soft-skill-chip {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
-        padding: 0.55rem 0.8rem;
+        gap: 0.4rem;
+        padding: 0.5rem 0.7rem;
         border-radius: 10px;
         background: var(--soft-chip-bg);
         border: 1px solid var(--soft-chip-border);
         box-shadow: var(--soft-chip-shadow);
         width: 100%;
         box-sizing: border-box;
-        font-size: 0.8rem;
-        min-height: 36px;
+        font-size: 0.7rem;
+        min-height: 34px;
         justify-content: center;
     }
 
     .soft-skill-chip .skill-badge {
-        font-size: 0.85rem;
+        font-size: 0.75rem;
     }
     
     .soft-skill-chip.hidden-extra {
@@ -356,35 +457,36 @@
 
     /* -------------------- Mobile Portfolio Section -------------------- */
     #portfolio {
-        padding: 50px 4%;
+        padding: 60px 4% 50px;
     }
 
     .project-categories {
-        display: flex;
+        padding: 0.75rem 3%;
+        gap: 0.5rem;
+        row-gap: 0.5rem;
+        margin-bottom: 32px;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 0.5rem;
-        margin-bottom: 30px;
-        padding: 0.5rem 0;
-        overflow: visible;
     }
     
     .category-btn {
         flex: 0 1 auto;
-        padding: 0.45rem 0.85rem;
+        padding: 9px 14px;
         font-size: 0.78rem;
-        border-radius: 18px;
-        white-space: nowrap;
-        min-height: 36px;
+        gap: 5px;
+    }
+    
+    .category-btn::before {
+        /* Smaller hover zone on mobile for better scrolling */
+        top: -6px;
+        left: -6px;
+        right: -6px;
+        bottom: -6px;
     }
 
     .portfolio-row {
         grid-template-columns: 1fr;
         gap: 1.5rem;
-    }
-
-    .portfolio-container {
-        padding: 1rem 0;
     }
     
     .project-card {
@@ -697,8 +799,8 @@
     }
 
     .soft-skill-chip {
-        padding: 0.65rem 1rem;
-        font-size: 0.85rem;
+        padding: 0.6rem 0.9rem;
+        font-size: 0.8rem;
         justify-content: center;
         width: 100%;
         box-sizing: border-box;
@@ -730,7 +832,7 @@
 
     /* Portfolio */
     #portfolio {
-        padding: 70px 6%;
+        padding: 70px 6% 50px;
     }
     
     .project-categories {
@@ -746,17 +848,6 @@
         padding: 0.55rem 1rem;
         font-size: 0.85rem;
         white-space: nowrap;
-    }
-
-    .portfolio-row {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 1.25rem;
-    }
-    
-    .portfolio-container {
-        max-width: 100%;
-        padding: 1rem 0;
     }
     
     .project-card {
@@ -779,7 +870,7 @@
         line-height: 1.5;
     }
 
-    /* Certifications */
+    /* Certifications - Tablet View: Show exactly 4 cards (2x2 grid) */
     .certifications {
         padding: 70px 6%;
     }
@@ -787,28 +878,52 @@
     .certifications-container {
         position: relative;
         padding: 0 60px;
+        max-width: 900px;
+        margin: 0 auto;
     }
 
     .cert-rows {
-        min-height: auto;
+        min-height: 420px;
+        position: relative;
+        overflow: visible;
     }
 
     .cert-row {
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 1.25rem;
-        position: relative;
-        opacity: 1;
-        visibility: visible;
+        position: absolute;
+        width: 100%;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease, transform 0.4s ease;
+        transform: translateX(30px);
+    }
+    
+    /* Show only active row */
+    .cert-row.active {
+        position: relative !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateX(0) !important;
     }
     
     .cert-row:not(.active) {
         display: none !important;
+        position: absolute !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
     }
     
+    /* Tablet-specific: Show all cards (2x2 grid with navigation) */
     .cert-row .cert-card {
         display: flex;
         width: 100%;
+    }
+
+    /* Hide only desktop-only extras on tablet - show all base cards */
+    .cert-row .desktop-only-card {
+        display: none !important;
     }
     
     .cert-nav-btn {
@@ -816,7 +931,27 @@
         top: 50%;
         transform: translateY(-50%);
         z-index: 10;
-        left: 10px;
+        width: 48px;
+        height: 48px;
+        background: var(--card-bg);
+        border: 2px solid var(--primary-color);
+        border-radius: 50%;
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+    
+    .cert-nav-btn:hover:not(:disabled) {
+        background: var(--primary-color);
+        color: white;
+        transform: translateY(-50%) scale(1.08);
+    }
+    
+    .cert-nav-btn:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
     }
     
     .cert-nav-btn.prev-btn {
@@ -831,7 +966,7 @@
 
     /* Contact */
     #contact {
-        padding: 50px 6%;
+        padding: 50px 6% 20px;
     }
     
     .section-header {
@@ -852,20 +987,42 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
         padding: 0;
+        margin-bottom: 0;
+        align-items: start;
     }
     
     .contact-group {
-        padding: 1.25rem 1rem;
+        padding: 1.25rem 1rem 0.75rem !important;
+        margin-bottom: 0 !important;
+    }
+    
+    /* Separate sizing for Connect With Me card - more compact */
+    .contact-group.social-group {
+        padding: 1rem 1rem 0.65rem !important;
+        min-height: auto !important;
+        height: fit-content !important;
+        align-self: start !important;
     }
     
     .contact-group-title {
         font-size: 1rem;
-        margin-bottom: 1rem;
+        margin-bottom: 0.75rem !important;
+    }
+    
+    /* Compact title for social group */
+    .contact-group.social-group .contact-group-title {
+        margin-bottom: 0.8rem !important;
+        font-size: 0.95rem !important;
+    }
+    
+    .contact-group.social-group .contact-group-title::after {
+        bottom: -6px !important;
     }
     
     .contact-item {
         padding: 0.5rem 0.25rem;
         gap: 0.6rem;
+        text-align: left;
     }
     
     .contact-item i {
@@ -875,19 +1032,36 @@
     .contact-item a,
     .contact-item span {
         font-size: 0.8rem;
+        text-align: left;
     }
     
     .social-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        gap: 0.75rem !important;
         justify-content: center;
+        align-items: center;
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
     }
     
     .social-links a {
-        width: 38px;
-        height: 38px;
-        font-size: 0.9rem;
+        width: 44px;
+        height: 44px;
+        font-size: 1.05rem;
+        margin: 0;
+        flex-shrink: 0;
+    }
+    
+    .social-links-wrapper {
+        margin-top: 0.8rem !important;
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+        padding-top: 0.35rem !important;
     }
 }
 
@@ -909,6 +1083,12 @@
 
     .cert-row .cert-card.active-card {
         display: flex;
+    }
+
+    /* Hide desktop-only and laptop/tablet-only duplicates on mobile */
+    .cert-row .desktop-only-card,
+    .cert-row .lt-only-card {
+        display: none !important;
     }
 }
 

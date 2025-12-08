@@ -48,12 +48,13 @@
     .skill-card,
     .cert-card {
         transform: none !important;
+        will-change: auto;
     }
 
-    .project-card:hover,
-    .skill-card:hover,
-    .cert-card:hover {
-        transform: translateY(-5px) !important;
+    .project-card:active,
+    .skill-card:active,
+    .cert-card:active {
+        transform: scale(0.98) !important;
     }
 
     /* -------------------- Optimize Animations -------------------- */
@@ -83,6 +84,16 @@
         display: none;
     }
 
+    /* Disable hover effects on touch devices */
+    @media (hover: none) and (pointer: coarse) {
+        .project-card:hover,
+        .skill-card:hover,
+        .cert-card:hover,
+        .btn:hover {
+            transform: none !important;
+        }
+    }
+
     /* Reduce box-shadows on mobile */
     .project-card,
     .skill-card,
@@ -92,16 +103,38 @@
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
+    /* Add GPU acceleration for elements that animate */
+    .project-card,
+    .skill-card,
+    .cert-card {
+        transform: translateZ(0);
+        backface-visibility: hidden;
+        -webkit-font-smoothing: antialiased;
+    }
+
     /* -------------------- Touch-Friendly Tap Targets -------------------- */
     .nav-link,
     .btn,
     .social-links a,
     .category-btn {
-        min-height: 44px;
-        min-width: 44px;
+        min-height: 48px;
+        min-width: 48px;
         display: flex;
         align-items: center;
         justify-content: center;
+        -webkit-tap-highlight-color: rgba(255, 51, 51, 0.1);
+        touch-action: manipulation;
+    }
+    
+    /* Specific override for category buttons in horizontal scroll */
+    .category-btn {
+        min-width: auto;
+    }
+
+    /* Optimize scrolling on mobile */
+    body {
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-y: contain;
     }
 
     /* -------------------- Hide Desktop-Only Elements -------------------- */

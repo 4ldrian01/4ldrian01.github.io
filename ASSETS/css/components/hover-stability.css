@@ -1,21 +1,18 @@
 /* ============================================
    HOVER STABILITY - Prevent Cursor Flickering
    ============================================
-   This file uses padding/margin techniques instead of
-   pseudo-elements to avoid conflicts with button shine effects.
-   
-   Solutions applied:
-   1. Extra padding on interactive elements
-   2. Negative margins to compensate for padding
-   3. Pointer-events management
-   4. Will-change for smoother transforms
+   This file prevents cursor flickering on hover by:
+   1. Using ::before pseudo-elements as stable hover zones
+   2. Pseudo-elements extend beyond visible button area
+   3. Prevents hover state toggling when element moves
+   4. Optimizing rendering performance
    ============================================ */
 
 /* ==========================================
    GLOBAL HOVER STABILITY
    ========================================== */
 
-/* Ensure smooth transforms don't cause repaints */
+/* Optimize rendering performance */
 .btn-primary,
 .btn-secondary,
 .category-btn,
@@ -29,23 +26,19 @@
 .theme-toggle,
 .cert-nav-btn,
 .soft-skill-chip {
-    will-change: transform;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 
 /* ==========================================
-   BUTTON HOVER STABILITY
+   BUTTON HOVER STABILITY - PSEUDO ELEMENT ZONES
    ========================================== */
 
-/* Buttons already have good padding, just ensure smooth transforms */
-.btn-primary,
-.btn-secondary,
-.category-btn,
-.project-link {
-    transform-origin: center center;
-}
+/* Note: Hover zones are now defined directly on each button type in buttons.css
+   to avoid conflicts with other pseudo-elements like shine effects */
 
 
 /* ==========================================
@@ -162,7 +155,8 @@ nav ul li a {
    CURSOR POINTER CONSISTENCY
    ========================================== */
 
-/* Ensure cursor stays pointer on all interactive elements */
+/* Ensure stable cursor on interactive elements */
+/* Note: Removed !important to prevent conflicts with state-based cursor changes */
 .btn-primary,
 .btn-secondary,
 .category-btn,
@@ -182,5 +176,5 @@ nav ul li a {
 .hamburger-lines,
 .mobile-menu__toggle,
 .mobile-menu__close {
-    cursor: pointer !important;
+    cursor: pointer;
 }
