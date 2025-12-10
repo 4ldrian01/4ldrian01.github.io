@@ -4,16 +4,14 @@
  * 
  * SECURITY NOTES:
  * - This access key is designed to be public (Web3Forms handles security server-side)
- * - Web3Forms validates submissions against your registered domain
+ * - Web3Forms FREE plan works on ANY domain (no domain restrictions)
  * - Never store sensitive credentials (passwords, private API keys) in frontend code
  * 
- * IMPORTANT - DOMAIN SETUP:
- * When you deploy your site, update your Web3Forms dashboard with your actual domain:
- * - For GitHub Pages: yourusername.github.io
- * - For Netlify: yoursite.netlify.app
- * - For custom domain: yourdomain.com
- * 
- * Current registered domain in Web3Forms: http://127.0.0.1:5502 (localhost for testing)
+ * DEPLOYMENT:
+ * This form works on:
+ * - Localhost (http://127.0.0.1:5502 or any local server)
+ * - GitHub Pages (https://4ldrian01.github.io)
+ * - Any other domain (Web3Forms free plan has no domain restrictions)
  */
 
 export const FORM_CONFIG = {

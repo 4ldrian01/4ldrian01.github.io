@@ -16,7 +16,7 @@ export class PortfolioFilter {
         this.animateFrame = null;
         this.debouncedPerformFilter = debounce(this.performFilter.bind(this), 150);
         
-        this.visibleLimit = 6;
+        this.visibleLimit = 7;
         this.isExpanded = false;
     }
 

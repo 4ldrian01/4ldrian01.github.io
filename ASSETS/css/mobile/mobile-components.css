@@ -20,7 +20,7 @@
         max-height: none !important;
         overflow: visible !important;
         min-height: auto;
-        transition: all 0.15s ease;
+        transition: transform 0.15s ease;
         -ms-overflow-style: none;
         scrollbar-width: none;
     }
@@ -38,7 +38,7 @@
         width: 80px;
         height: 80px;
         border-width: 3px;
-        transition: all 0.3s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .skill-card:hover .skill-icon {
@@ -385,7 +385,7 @@
         width: 70px;
         height: 70px;
         border-width: 3px;
-        transition: all 0.3s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     
     .skill-card:hover .skill-icon {

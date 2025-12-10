@@ -82,7 +82,7 @@
     font-size: clamp(0.9rem, 2vw, 1rem);
     text-transform: uppercase;
     letter-spacing: 1px;
-    transition: all var(--transition-speed) var(--transition-ease);
+    transition: transform var(--transition-speed) var(--transition-ease), box-shadow var(--transition-speed) var(--transition-ease), background var(--transition-speed) var(--transition-ease);
     position: relative;
     overflow: visible;
     cursor: pointer;
@@ -139,9 +139,10 @@
 }
 
 .btn-primary:hover {
-    transform: none;
-    box-shadow: 0 8px 25px rgba(255, 51, 51, 0.3);
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(255, 51, 51, 0.4);
     color: white;
+    filter: brightness(1.1);
 }
 
 .btn-primary:focus-visible {
@@ -150,13 +151,13 @@
 }
 
 .btn-primary:active {
-    transform: translateY(-1px);
-    transition: all 0.1s ease;
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
 }
 
 @media (max-width: 767px) {
     .btn-primary {
-        transition: all 0.15s ease;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 }
 
@@ -186,7 +187,8 @@
     background: rgba(255, 255, 255, 0.1);
     border-color: var(--primary-color);
     color: var(--primary-color);
-    transform: none;
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(255, 68, 68, 0.15);
 }
 
 .btn-secondary:focus-visible {
@@ -197,12 +199,12 @@
 
 .btn-secondary:active {
     transform: scale(0.97);
-    transition: all 0.1s ease;
+    transition: transform 0.1s ease;
 }
 
 @media (max-width: 767px) {
     .btn-secondary {
-        transition: all 0.15s ease;
+        transition: transform 0.15s ease, background 0.15s ease;
     }
 }
 
@@ -244,8 +246,9 @@
 .btn-success:hover {
     background: var(--green-accent-hover);
     border-color: var(--green-accent-hover);
-    transform: none;
-    box-shadow: 0 8px 25px rgba(var(--green-accent-rgb), 0.35);
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(var(--green-accent-rgb), 0.4);
+    filter: brightness(1.05);
 }
 
 .btn-success:focus-visible {
@@ -254,13 +257,13 @@
 }
 
 .btn-success:active {
-    transform: translateY(-1px);
-    transition: all 0.1s ease;
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
 }
 
 @media (max-width: 767px) {
     .btn-success {
-        transition: all 0.15s ease;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 }
 
@@ -274,8 +277,9 @@
 .btn-success-outline:hover {
     background: var(--green-accent);
     color: #1a1a1a;
-    transform: none;
-    box-shadow: 0 8px 25px rgba(var(--green-accent-rgb), 0.25);
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(var(--green-accent-rgb), 0.3);
+    filter: brightness(1.05);
 }
 
 .btn-success-outline:focus-visible {
@@ -345,7 +349,7 @@
 
 @media (max-width: 767px) {
     .category-btn {
-        transition: all 0.15s ease;
+        transition: background 0.15s ease, transform 0.15s ease, color 0.15s ease;
         padding: 12px 28px;
         min-height: 48px;
     }
@@ -446,7 +450,7 @@
     font-size: clamp(0.95rem, 2vw, 1.05rem);
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -474,7 +478,7 @@
     border: 1px solid rgba(255, 68, 68, 0.2);
     color: var(--text-color);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -492,14 +496,14 @@
 
 .cert-nav-btn:active:not(:disabled) {
     transform: translateY(-50%) scale(0.92);
-    transition: all 0.1s ease;
+    transition: transform 0.1s ease;
 }
 
 @media (max-width: 767px) {
     .cert-nav-btn {
         width: 52px;
         height: 52px;
-        transition: all 0.15s ease;
+        transition: background 0.15s ease, transform 0.15s ease;
         font-size: 1.2rem;
     }
 }
@@ -537,3 +541,158 @@
     right: 12px;
     left: auto;
 }
+
+/* ============================================
+   ABOUT SECTION RESUME BUTTON
+   ============================================ */
+
+/* Resume Button Container */
+.about-resume-btn-container {
+    margin: 30px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* Resume Button - Elegant Modern Style */
+.btn-resume {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 14px 36px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: transform var(--transition-speed) var(--transition-ease), 
+                box-shadow var(--transition-speed) var(--transition-ease), 
+                background var(--transition-speed) var(--transition-ease),
+                border-color var(--transition-speed) var(--transition-ease);
+    position: relative;
+    overflow: visible;
+    cursor: pointer;
+    min-height: 52px;
+    -webkit-tap-highlight-color: transparent;
+    text-decoration: none;
+    
+    /* Elegant gradient background */
+    background: linear-gradient(135deg, var(--primary-color) 0%, #ff5555 100%);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 6px 20px rgba(255, 51, 51, 0.3);
+    z-index: 1;
+}
+
+/* Icon animation on hover - smooth bounce */
+.btn-resume i {
+    transition: transform 0.4s ease;
+    font-size: 1.1em;
+    display: inline-block;
+}
+
+.btn-resume:hover i {
+    animation: downloadBounce 0.6s ease infinite;
+}
+
+@keyframes downloadBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(4px);
+    }
+}
+
+/* Text color remains white */
+.btn-resume > * {
+    position: relative;
+    color: white;
+    z-index: 1;
+}
+
+/* Hover state */
+.btn-resume:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 30px rgba(255, 51, 51, 0.5);
+    background: linear-gradient(135deg, #ff5555 0%, var(--primary-color) 100%);
+    border-color: rgba(255, 255, 255, 0.4);
+    color: white;
+    filter: brightness(1.08);
+}
+
+/* Focus state for accessibility */
+.btn-resume:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 4px;
+}
+
+/* Active state */
+.btn-resume:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+}
+
+/* Tablet Responsive (1024px and below) */
+@media (max-width: 1023px) {
+    .about-resume-btn-container {
+        margin: 25px 0;
+    }
+    
+    .btn-resume {
+        padding: 13px 32px;
+        font-size: clamp(0.9rem, 2.2vw, 0.95rem);
+        min-height: 48px;
+    }
+}
+
+/* Mobile Responsive (767px and below) */
+@media (max-width: 767px) {
+    .about-resume-btn-container {
+        margin: 20px 0;
+        justify-content: center;
+    }
+    
+    .btn-resume {
+        padding: 14px 28px;
+        font-size: 0.9rem;
+        min-height: 48px;
+        width: 100%;
+        max-width: 100%;
+        justify-content: center;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    
+    .btn-resume:hover {
+        transform: scale(1.02);
+    }
+}
+
+/* Extra Small Mobile (480px and below) */
+@media (max-width: 480px) {
+    .btn-resume {
+        padding: 12px 24px;
+        font-size: 0.85rem;
+        min-height: 46px;
+    }
+}
+
+/* Reduced Motion for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .btn-resume {
+        transition: none;
+    }
+    
+    .btn-resume:hover {
+        transform: none;
+    }
+    
+    .btn-resume i {
+        transition: none;
+    }
+    
+    .btn-resume:hover i {
+        transform: none;
+    }
+}
+

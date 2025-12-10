@@ -279,6 +279,10 @@ export class ProjectModal {
     close() {
         if (!this.isOpen) return;
         
+        // Immediately unlock scroll for instant responsiveness
+        document.body.style.overflow = '';
+        document.documentElement.style.overflow = '';
+        
         // Use requestAnimationFrame for smooth animation
         requestAnimationFrame(() => {
             this.overlay.classList.remove('active');
@@ -287,7 +291,6 @@ export class ProjectModal {
             setTimeout(() => {
                 document.documentElement.classList.remove('modal-open');
                 document.body.classList.remove('modal-open');
-                document.body.style.overflow = '';
                 document.body.style.paddingRight = '';
             }, 200); // Match CSS transition duration
         });

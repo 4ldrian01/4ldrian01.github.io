@@ -15,7 +15,7 @@
     z-index: var(--z-modal-backdrop);
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.2s ease, visibility 0.2s ease;
+    transition: opacity 0.15s ease, visibility 0.15s ease;
     overflow-y: auto;
     display: flex;
     align-items: center;
@@ -50,8 +50,8 @@
     overflow: hidden;
     transform: scale(0.95) translateY(10px) translateZ(0);
     opacity: 0;
-    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-                opacity 0.2s ease;
+    transition: transform 0.18s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.15s ease;
     /* Hardware acceleration */
     will-change: transform, opacity;
     backface-visibility: hidden;
@@ -315,7 +315,7 @@
     border-radius: 22px;
     font-size: 0.88rem;
     font-weight: 500;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -401,12 +401,13 @@
 .modal-btn-primary:hover {
     background: var(--accent-hover);
     color: white;
-    transform: translateY(-1px) translateZ(0);
-    box-shadow: 0 8px 20px rgba(255, 51, 51, 0.3);
+    transform: scale(1.03) translateZ(0);
+    box-shadow: 0 8px 20px rgba(255, 51, 51, 0.4);
+    filter: brightness(1.1);
 }
 
 .modal-btn-primary:active {
-    transform: scale(0.98) translateZ(0);
+    transform: scale(0.97) translateZ(0);
     transition: transform 0.1s ease;
 }
 
@@ -419,12 +420,13 @@
 .modal-btn-secondary:hover {
     border-color: var(--primary-color);
     color: var(--primary-color);
-    background: rgba(255, 51, 51, 0.1);
-    transform: translateY(-1px) translateZ(0);
+    background: rgba(255, 51, 51, 0.15);
+    transform: scale(1.03) translateZ(0);
+    box-shadow: 0 6px 16px rgba(255, 68, 68, 0.2);
 }
 
 .modal-btn-secondary:active {
-    transform: scale(0.98) translateZ(0);
+    transform: scale(0.97) translateZ(0);
     transition: transform 0.1s ease;
 }
 
@@ -500,18 +502,18 @@ body.modal-open {
         transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
     }
     
-    /* Disable hover transforms on mobile, only active state */
+    /* Simplified hover transforms on mobile */
     .modal-btn-primary:hover,
     .modal-btn-secondary:hover {
-        transform: translateZ(0);
+        transform: scale(1.01) translateZ(0);
     }
     
     .modal-btn-primary:active {
-        transform: scale(0.96) translateZ(0);
+        transform: scale(0.97) translateZ(0);
     }
     
     .modal-btn-secondary:active {
-        transform: scale(0.96) translateZ(0);
+        transform: scale(0.97) translateZ(0);
     }
     
     /* Disable tech tag hover on mobile for better performance */
@@ -588,7 +590,7 @@ body.modal-open {
     padding: 2rem;
     opacity: 1;
     visibility: visible;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    transition: opacity 0.15s ease, visibility 0.15s ease;
 }
 
 /* Keep cert overlay dark even in light theme */
@@ -618,7 +620,7 @@ body.modal-open {
     justify-content: center;
     font-size: 1.5rem;
     line-height: 1;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
     z-index: 10001;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
     /* Enhanced touch target */
@@ -699,6 +701,134 @@ body.modal-open {
 /* Tablet view */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
     .cert-overlay__img {
+        max-height: 88vh;
+    }
+}
+
+/* ============================================
+   PROFILE PICTURE OVERLAY
+   ============================================ */
+
+.profile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    transition: opacity 0.15s ease, visibility 0.15s ease;
+    cursor: zoom-out;
+}
+
+.profile-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.profile-overlay__close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    line-height: 1;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    z-index: 10001;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    min-width: 48px;
+    min-height: 48px;
+}
+
+.profile-overlay__close:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 51, 51, 0.4);
+}
+
+.profile-overlay__close:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 3px;
+}
+
+.profile-overlay__img-wrapper {
+    position: relative;
+    max-width: 95%;
+    max-height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: profileZoomIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes profileZoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.profile-overlay__img {
+    max-width: 100%;
+    max-height: 90vh;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Mobile responsiveness for profile overlay */
+@media screen and (max-width: 767px) {
+    .profile-overlay {
+        padding: 1rem;
+    }
+    
+    .profile-overlay__close {
+        top: 1rem;
+        right: 1rem;
+        width: 42px;
+        height: 42px;
+        font-size: 1.75rem;
+    }
+    
+    .profile-overlay__img-wrapper {
+        max-width: 100%;
+        max-height: 85%;
+    }
+    
+    .profile-overlay__img {
+        max-height: 85vh;
+        border-radius: 8px;
+    }
+}
+
+/* Tablet view */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .profile-overlay__img {
         max-height: 88vh;
     }
 }

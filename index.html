@@ -147,7 +147,7 @@
                     <p class="hero-subtitle">Passionate about Programming, IT Networking, <br> Cybersecurity, and creating
                         innovative solutions.</p>
                     <div class="btn-container">
-                        <a href="#contact" class="btn btn-primary">
+                        <a href="ASSETS/documents/Aldrian_Sahid_CV.pdf" download="Aldrian_Sahid_CV.pdf" class="btn btn-primary">
                             <i class="fas fa-download"></i>
                             Download CV
                         </a>
@@ -268,17 +268,17 @@
                         technical and professional skills, and contribute to real-world projects.
                     </p>
                     <p class="text-paragraph">
-                        This portfolio was created as a project for my IT Elective 2 - Web Development course and
+                        This portfolio was created when I was in 2nd-year of college as a project for my IT Elective 2 - Web Development subject and
                         fulfills requirements for my major in Advanced Database System. It is now my official
                         personal
-                        portfolio, where i can showcase projects from past coursework and future projects!
+                        portfolio, where i can showcase all of my works from past coursework and future projects!
                     </p>
-                    
-                    <!-- Resume Download Button -->
-                    <div class="resume-download-wrapper">
-                        <a href="ASSETS/resume/Aldrian-Sahid-Resume.pdf" download class="btn btn-primary resume-btn">
-                            <i class="fas fa-download"></i>
-                            <span>Download My Resume</span>
+
+                    <!-- Download Resume Button -->
+                    <div class="about-resume-btn-container">
+                        <a href="ASSETS/documents/Aldrian_Sahid_Resume.pdf" download="Aldrian_Sahid_Resume.pdf" class="btn btn-resume">
+                            <i class="fas fa-file-download"></i>
+                            Download Resume
                         </a>
                     </div>
 
@@ -735,12 +735,8 @@
                     <hr>
                     <form action="https://api.web3forms.com/submit" method="POST" id="contactForm" novalidate>
                         <!-- Web3Forms Access Key -->
+                        <!-- Web3Forms Access Key -->
                         <input type="hidden" name="access_key" value="2e408031-438d-4efd-a25a-919ba433439c">
-                        
-                        <!-- Web3Forms Configuration -->
-                        <input type="hidden" name="subject" value="New Contact Form Submission - Portfolio">
-                        <input type="hidden" name="from_name" value="Portfolio Contact Form">
-                        <input type="hidden" name="redirect" value="">
                         
                         <!-- Honeypot Spam Protection (Do not fill this field) -->
                         <input type="checkbox" name="botcheck" class="hidden" style="display: none;" tabindex="-1" aria-hidden="true">
@@ -772,7 +768,7 @@
                         </div>
                         <div class="input-group">
                             <label for="subject">Subject <span class="required-indicator" aria-hidden="true">*</span></label>
-                            <input type="text" id="subject" name="user_subject" required 
+                            <input type="text" id="subject" name="subject" required 
                                 placeholder="e.g., Project Collaboration, Job Opportunity, General Inquiry" 
                                 aria-describedby="subjectHint subjectError" 
                                 aria-required="true">
@@ -885,6 +881,9 @@
     }
     </script>
 
+    <!-- Contact Form Test Script (for debugging) -->
+    <script src="ASSETS/js/test-form.js"></script>
+    
     <!-- Main Application Entry Point (ES Modules) -->
     <script type="module" src="ASSETS/js/main.js"></script>
 </body>

@@ -180,6 +180,9 @@ class PortfolioApp {
         
         // Image loading state detection for project cards
         this.initImageLoadingStates();
+        
+        // Profile picture overlay functionality
+        this.initProfilePictureOverlay();
     }
 
     /**
@@ -211,6 +214,73 @@ class PortfolioApp {
                     if (container) container.classList.add('loaded');
                 });
             }
+        });
+    }
+
+    /**
+     * Initializes profile picture clickable overlay
+     * Allows users to view enlarged profile picture similar to certificates
+     * 
+     * @private
+     * @returns {void}
+     */
+    initProfilePictureOverlay() {
+        const profileImage = document.querySelector('.about-image');
+        if (!profileImage) return;
+
+        // Create overlay structure
+        const overlay = document.createElement('div');
+        overlay.className = 'profile-overlay hidden';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.setAttribute('aria-label', 'Profile picture preview');
+
+        const imgWrapper = document.createElement('div');
+        imgWrapper.className = 'profile-overlay__img-wrapper';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'profile-overlay__close';
+        closeBtn.setAttribute('aria-label', 'Close profile picture preview');
+        closeBtn.innerHTML = '&times;';
+
+        const overlayImg = document.createElement('img');
+        overlayImg.className = 'profile-overlay__img';
+        overlayImg.alt = 'Profile picture preview';
+
+        imgWrapper.appendChild(overlayImg);
+        overlay.appendChild(closeBtn);
+        overlay.appendChild(imgWrapper);
+        document.body.appendChild(overlay);
+
+        const hideOverlay = () => {
+            // Unlock scroll immediately for instant responsiveness
+            document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
+            // Then trigger fade out animation
+            requestAnimationFrame(() => {
+                overlay.classList.add('hidden');
+            });
+        };
+
+        const showOverlay = () => {
+            overlayImg.src = profileImage.src;
+            overlayImg.alt = profileImage.alt || 'Profile picture preview';
+            overlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            document.documentElement.style.overflow = 'hidden';
+        };
+
+        // Make profile image clickable
+        profileImage.style.cursor = 'zoom-in';
+        profileImage.addEventListener('click', showOverlay);
+
+        // Close overlay handlers
+        closeBtn.addEventListener('click', hideOverlay);
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) hideOverlay();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (!overlay.classList.contains('hidden') && e.key === 'Escape') hideOverlay();
         });
     }
 

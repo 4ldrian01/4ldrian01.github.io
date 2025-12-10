@@ -102,7 +102,7 @@
     caret-color: var(--primary-color) !important;
     font-size: clamp(0.95rem, 2vw, 1rem);
     font-family: inherit;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1), background 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     min-height: 48px;
     box-sizing: border-box;
 }
@@ -111,6 +111,10 @@
     min-height: 150px;
     resize: vertical;
     line-height: 1.6;
+    /* Enable smooth touch scrolling on mobile/tablet */
+    -webkit-overflow-scrolling: touch;
+    overflow-y: auto;
+    touch-action: pan-y;
 }
 
 .input-group input:focus,
@@ -330,7 +334,7 @@
     font-size: clamp(0.9rem, 2vw, 1rem);
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -344,13 +348,14 @@
 .contact-form .submit-btn:hover,
 .contact-form button[type="submit"]:hover {
     background: #ff5555;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(255, 68, 68, 0.35);
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(255, 68, 68, 0.4);
+    filter: brightness(1.1);
 }
 
 .contact-form .submit-btn:active,
 .contact-form button[type="submit"]:active {
-    transform: translateY(0);
+    transform: scale(0.97);
 }
 
 .contact-form .submit-btn:focus-visible,
@@ -454,7 +459,7 @@
     z-index: 10000;
     opacity: 0;
     transform: translateX(120%) scale(0.9);
-    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     pointer-events: none;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -469,7 +474,7 @@
 .form-notification--hiding {
     opacity: 0;
     transform: translateX(120%) scale(0.9);
-    transition: all 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .form-notification__icon {
@@ -485,15 +490,15 @@
 }
 
 .form-notification--success .form-notification__icon {
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2));
-    color: #10b981;
-    border: 2px solid rgba(16, 185, 129, 0.4);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.25), rgba(22, 163, 74, 0.25));
+    color: #22c55e;
+    border: 2px solid rgba(34, 197, 94, 0.5);
 }
 
 .form-notification--error .form-notification__icon {
-    background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(220, 38, 38, 0.2));
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(220, 38, 38, 0.25));
     color: #ef4444;
-    border: 2px solid rgba(239, 68, 68, 0.4);
+    border: 2px solid rgba(239, 68, 68, 0.5);
 }
 
 .form-notification--success .form-notification__icon::after {
@@ -553,7 +558,7 @@
     align-items: center;
     justify-content: center;
     font-size: 0.9rem;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
     margin-top: 0.2rem;
 }
 

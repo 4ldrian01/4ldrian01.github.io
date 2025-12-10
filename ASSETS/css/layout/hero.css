@@ -25,7 +25,7 @@
     height: 450px;
     border-radius: 50%;
     background: radial-gradient(circle at 30% 30%, var(--hero-circle-glow), var(--hero-circle-color) 40%, transparent 70%);
-    filter: blur(60px);
+    filter: blur(30px);
     opacity: 1;
     z-index: 0;
     pointer-events: none;
@@ -481,6 +481,6 @@
         width: 300px;
         height: 300px;
         background: radial-gradient(circle at 40% 40%, var(--hero-circle-glow), transparent 60%);
-        filter: blur(50px);
+        filter: blur(30px);
     }
 }

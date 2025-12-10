@@ -212,58 +212,7 @@ section:not(#contact)::after {
     text-align: justify;
 }
 
-/* Resume Download Button Wrapper */
-.resume-download-wrapper {
-    margin: 1.5rem 0 2rem;
-    display: flex;
-    justify-content: flex-start;
-}
 
-.resume-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 10px 20px;
-    background: linear-gradient(135deg, var(--primary-color) 0%, #ff5555 100%);
-    color: white;
-    border-radius: 25px;
-    font-weight: 600;
-    font-size: 0.875rem;
-    text-decoration: none;
-    box-shadow: 0 4px 15px rgba(255, 51, 51, 0.3);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.resume-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s ease;
-}
-
-.resume-btn:hover::before {
-    left: 100%;
-}
-
-.resume-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(255, 51, 51, 0.4);
-}
-
-.resume-btn i {
-    font-size: 0.875rem;
-    transition: transform 0.3s ease;
-}
-
-.resume-btn:hover i {
-    transform: translateY(2px);
-}
 
 /* About Interests - Elegant Overlay */
 .about-interests-overlay {
@@ -278,49 +227,54 @@ section:not(#contact)::after {
 
 .interests-grid {
     display: grid;
-    /* auto-fit creates columns dynamically for new interests */
-    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
-    gap: clamp(0.4rem, 1vw, 0.6rem);
+    /* Force exactly 4 columns for all screen sizes - single horizontal row */
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(0.35rem, 1vw, 0.6rem);
     /* Ensures grid stays balanced with new items */
     justify-items: stretch;
-}
-
-/* Cap at 4 columns on larger screens */
-@media (min-width: 768px) {
-    .interests-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
+    width: 100%;
 }
 
 .interest-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 0.5rem;
-    background: rgba(255, 68, 68, 0.1);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 68, 68, 0.2);
-    transition: all 0.25s ease;
+    justify-content: center;
+    gap: clamp(0.35rem, 1vw, 0.5rem);
+    padding: clamp(0.65rem, 1.5vw, 0.85rem) clamp(0.4rem, 1vw, 0.6rem);
+    background: rgba(255, 68, 68, 0.12);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 68, 68, 0.22);
+    transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     min-height: 44px; /* Touch-friendly target */
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .interest-item:hover {
-    background: rgba(255, 68, 68, 0.2);
-    transform: translateY(-2px);
-    border-color: rgba(255, 68, 68, 0.4);
+    background: rgba(255, 68, 68, 0.25);
+    transform: scale(1.05);
+    border-color: rgba(255, 68, 68, 0.45);
+    box-shadow: 0 6px 16px rgba(255, 68, 68, 0.25);
 }
 
 .interest-item i {
-    font-size: 1.3rem;
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
     color: var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+.interest-item:hover i {
+    transform: scale(1.1);
 }
 
 .interest-item span {
-    font-size: 0.8rem;
+    font-size: clamp(0.7rem, 1.8vw, 0.8rem);
     color: var(--text-color);
-    font-weight: 500;
+    font-weight: 600;
     text-align: center;
+    line-height: 1.2;
+    white-space: nowrap;
 }
 
 .divider {
@@ -542,7 +496,7 @@ section:not(#contact)::after {
     color: var(--text-color);
     font-weight: 500;
     font-size: clamp(0.95rem, 2vw, 1rem);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid var(--soft-chip-border);
     box-shadow: var(--soft-chip-shadow);
     display: inline-flex;
@@ -598,7 +552,7 @@ section:not(#contact)::after {
 
 .soft-skill-chip:active {
     transform: translateY(0) scale(0.98);
-    transition: all 0.1s ease;
+    transition: transform 0.1s ease;
 }
 
 .soft-skill-chip.hidden-extra {
@@ -633,7 +587,7 @@ section:not(#contact)::after {
     font-weight: 600;
     font-size: clamp(0.85rem, 2vw, 0.9rem);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
     margin: 1rem auto 0;
     min-height: 38px;
 }
@@ -669,7 +623,7 @@ section:not(#contact)::after {
 
 @media (max-width: 767px) {
     .soft-skills-toggle {
-        transition: all 0.15s ease;
+        transition: background 0.15s ease, transform 0.15s ease;
     }
 }
 
@@ -937,7 +891,7 @@ section:not(#contact)::after {
     background: rgba(255, 68, 68, 0.3);
     border: none;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, transform 0.3s ease;
     padding: 0;
 }
 
@@ -1012,13 +966,9 @@ section:not(#contact)::after {
     }
 }
 
-/* 1024px laptop optimization */
+/* 1024px laptop optimization - handled in laptop-1024.css */
 @media (min-width: 1024px) and (max-width: 1279px) {
-    .contact-wrapper {
-        grid-template-columns: 1.15fr 1fr;
-        gap: 2rem;
-        max-width: 90%;
-    }
+    /* Contact wrapper styles moved to laptop-1024.css for better organization */
 }
 
 .contact-details {
@@ -1165,7 +1115,7 @@ section:not(#contact)::after {
     border-radius: 50%;
     background: rgba(255, 68, 68, 0.1);
     color: var(--text-color);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(255, 68, 68, 0.2);
     font-size: 1.15rem;
     margin: 0 auto;
@@ -1174,9 +1124,10 @@ section:not(#contact)::after {
 .social-links a:hover {
     background: var(--primary-color);
     color: white;
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 6px 16px rgba(255, 68, 68, 0.4);
+    transform: scale(1.15);
+    box-shadow: 0 8px 24px rgba(255, 68, 68, 0.5);
     border-color: var(--primary-color);
+    filter: brightness(1.1);
 }
 
 .social-links a:focus-visible {
@@ -1185,7 +1136,7 @@ section:not(#contact)::after {
 }
 
 .social-links a:active {
-    transform: translateY(-2px) scale(1);
+    transform: scale(0.95);
 }
 
 /* Contact Section Reduced Motion */

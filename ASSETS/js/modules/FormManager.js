@@ -35,7 +35,63 @@ export class FormManager {
         this.inputs.forEach(input => {
             input.addEventListener('input', () => this.validateInput(input));
             input.addEventListener('blur', () => this.validateInput(input));
+            
+            // Enter key submission for desktop/laptop (except textarea)
+            if (input.tagName !== 'TEXTAREA') {
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        this.handleEnterKeySubmission();
+                    }
+                });
+            }
         });
+        
+        // Optional: Add Enter key listener to submit button for consistency
+        if (this.submitButton) {
+            this.submitButton.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    this.handleEnterKeySubmission();
+                }
+            });
+        }
+    }
+    
+    /**
+     * Handle Enter key submission with validation
+     * Prevents accidental submissions and ensures all fields are valid
+     */
+    handleEnterKeySubmission() {
+        // Check if all fields are filled and valid
+        let hasEmptyFields = false;
+        let hasInvalidFields = false;
+        
+        this.inputs.forEach(input => {
+            const value = input.value.trim();
+            if (value === '') {
+                hasEmptyFields = true;
+            } else if (!this.validateInput(input)) {
+                hasInvalidFields = true;
+            }
+        });
+        
+        // Show appropriate feedback
+        if (hasEmptyFields) {
+            this.showNotification('Please fill in all fields before submitting', 'error');
+            return;
+        }
+        
+        if (hasInvalidFields) {
+            this.showNotification('Please correct all errors before submitting', 'error');
+            return;
+        }
+        
+        // All validations passed - programmatically click the submit button
+        // This ensures the existing handleSubmit method is called properly
+        if (this.submitButton && !this.submitButton.disabled) {
+            this.submitButton.click();
+        }
     }
 
     validateInput(input) {
@@ -133,11 +189,27 @@ export class FormManager {
     async handleSubmit(e) {
         e.preventDefault();
 
+        // Check for network connectivity first
+        if (!navigator.onLine) {
+            this.showNotification('No internet connection. Please check your network and try again.', 'error');
+            return;
+        }
+
+        // Rate limiting: Prevent rapid submissions (30 second cooldown)
+        const lastSubmitTime = localStorage.getItem('lastFormSubmit');
+        const now = Date.now();
+        if (lastSubmitTime && (now - parseInt(lastSubmitTime)) < this.config.rateLimitMs) {
+            const waitTime = Math.ceil((this.config.rateLimitMs - (now - parseInt(lastSubmitTime))) / 1000);
+            this.showNotification(`Please wait ${waitTime} seconds before submitting again.`, 'error');
+            console.warn('⚠️ Rate limit triggered - user must wait', waitTime, 'seconds');
+            return;
+        }
+
         // Check honeypot (spam bots will fill this)
         const honeypot = this.form.querySelector('input[name="botcheck"]');
         if (honeypot && honeypot.checked) {
             // Silently reject spam
-            console.warn('Spam submission detected');
+            console.warn('⚠️ Spam submission detected - honeypot triggered');
             this.showNotification('Message sent successfully!', 'success');
             return;
         }
@@ -202,31 +274,54 @@ ${userMessage || '(No message provided)'}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             `.trim();
             
-            // Create new FormData with only the fields Web3Forms needs
-            const formData = new FormData();
-            formData.append('access_key', this.config.accessKey);
-            formData.append('name', userName);
-            formData.append('email', userEmail);
-            formData.append('subject', `Portfolio Contact: ${userSubject}`);
-            formData.append('message', emailBody);
+            // Create JSON payload for Web3Forms
+            // Note: Using 'from_name' field instead of 'message' to avoid redundant 'Message:' label
+            // Web3Forms displays 'message' with a label, but 'from_name' displays without prefix
+            const payload = {
+                access_key: this.config.accessKey,
+                subject: `Portfolio Contact: ${userSubject}`,
+                from_name: emailBody,  // Using from_name to display content without 'Message:' prefix
+                botcheck: false  // Disable captcha requirement
+            };
 
-            // Submit to Web3Forms
+            // Submit to Web3Forms with timeout
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 20000); // 20 second timeout
+
             const response = await fetch(this.config.endpoint, {
                 method: 'POST',
-                body: formData
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(payload),
+                signal: controller.signal
             });
 
-            // Check if response is ok
+            clearTimeout(timeoutId);
+
+            // Check if response is ok first
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                const errorText = await response.text();
+                console.error('Server response error:', response.status, errorText);
+                throw new Error(`Server error: ${response.status}`);
             }
 
+            // Parse JSON response
             const result = await response.json();
-
+            console.log('Web3Forms response:', result); // Debug log
+            
+            // Check for success in the response object (Web3Forms returns success field)
             if (result.success) {
+                // Save timestamp for rate limiting (30 seconds cooldown)
+                localStorage.setItem('lastFormSubmit', Date.now().toString());
+                
                 this.showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
                 this.form.reset();
                 this.inputs.forEach(input => input.classList.remove('valid'));
+                
+                // Security log: successful submission
+                console.log('✅ Form submitted successfully at', new Date().toLocaleString());
             } else {
                 // Log the error for debugging
                 console.error('Web3Forms error:', result);
@@ -234,7 +329,17 @@ ${userMessage || '(No message provided)'}
             }
         } catch (error) {
             console.error('Error submitting form:', error);
-            this.showNotification('Failed to send message. Please try again later.', 'error');
+            
+            // Check if it's a network error
+            if (error.name === 'AbortError') {
+                this.showNotification('Request timed out. Please check your connection and try again.', 'error');
+            } else if (!navigator.onLine) {
+                this.showNotification('Lost internet connection. Please check your network and try again.', 'error');
+            } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                this.showNotification('Network error. Please check your connection and try again.', 'error');
+            } else {
+                this.showNotification('Failed to send message. Please try again later.', 'error');
+            }
         } finally {
             this.setFormState(true);
         }

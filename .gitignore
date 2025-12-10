@@ -21,6 +21,15 @@ desktop.ini
 # Ignore deployment and configuration files used only locally
 DEPLOYMENT_CHECKLIST.md
 
+# Documentation files (useful only for local development)
+*.md
+!README.md
+
+# Local test and documentation files (in ASSETS/documents/)
+ASSETS/documents/create_placeholders.ps1
+ASSETS/documents/RESUME_BUTTON_README.md
+ASSETS/documents/TEST_DOWNLOAD_BUTTONS.html
+
 # Logs
 logs/
 *.log
@@ -43,10 +52,17 @@ tmp/
 # Node modules (if you add build tools later)
 node_modules/
 package-lock.json
+
+# Code Protection Notes:
+# - ASSETS/js/ = Your original source code (committed to repo)
+# - dist/js/ = Obfuscated code for deployment (committed to repo)
+# - build-obfuscated.js = Build script (committed to repo)
+# All three folders/files should be tracked by git!
 yarn.lock
 
 # Build outputs
-dist/
+# NOTE: dist/js/ contains obfuscated code and SHOULD be committed
+# dist/ - commented out, we need to track obfuscated JS
 build/
 out/
 .next/

@@ -391,8 +391,13 @@ export class CertificationNav {
         document.body.appendChild(overlay);
 
         const hideOverlay = () => {
-            overlay.classList.add('hidden');
+            // Unlock scroll immediately for instant responsiveness
             document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
+            // Then trigger fade out animation
+            requestAnimationFrame(() => {
+                overlay.classList.add('hidden');
+            });
         };
 
         const showOverlay = (src, altText) => {
@@ -400,6 +405,7 @@ export class CertificationNav {
             overlayImg.alt = altText || 'Certificate preview';
             overlay.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
+            document.documentElement.style.overflow = 'hidden';
         };
 
         closeBtn.addEventListener('click', hideOverlay);

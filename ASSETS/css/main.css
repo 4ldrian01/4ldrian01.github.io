@@ -9,7 +9,10 @@
    1. BASE STYLES (Foundation)
    ========================================== */
 
-/* CSS Variables - Must be first */
+/* Normalize.css - Cross-browser compatibility (Must be first) */
+@import url('./base/normalize.css');
+
+/* CSS Variables - Must be second */
 @import url('./base/variables.css');
 
 /* Reset/Normalize - Apply before other styles */

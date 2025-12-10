@@ -88,7 +88,8 @@ nav ul li a[href="#skills"].active::after {
 
 .hero-social-links a:hover {
     color: var(--primary-color);
-    transform: translateY(-3px);
+    transform: scale(1.15);
+    filter: brightness(1.2);
 }
 
 /* Contact Social Links */
@@ -108,16 +109,20 @@ nav ul li a[href="#skills"].active::after {
     justify-content: center;
     color: var(--text-color);
     font-size: 1.2rem;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, transform 0.3s ease, color 0.3s ease;
 }
 
 .social-links a:hover {
     background: var(--primary-color);
-    transform: translateY(-3px);
+    color: white;
+    transform: scale(1.15);
+    box-shadow: 0 8px 24px rgba(255, 68, 68, 0.5);
 }
 
 /* Green accent variant for social links */
 .social-links a.green-hover:hover {
     background: var(--green-accent);
     color: #1a1a1a;
+    transform: scale(1.15);
+    box-shadow: 0 8px 24px rgba(var(--green-accent-rgb), 0.4);
 }

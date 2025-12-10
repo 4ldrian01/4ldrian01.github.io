@@ -26,7 +26,7 @@
         height: 340px;
         right: -10%;
         top: -12%;
-        filter: blur(50px);
+        filter: blur(30px);
     }
 
     .hero-left {
@@ -272,28 +272,25 @@
     }
 
     .interests-grid {
-        /* auto-fit allows new interests to automatically create columns */
-        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-        gap: clamp(0.4rem, 1.5vw, 0.65rem);
-    }
-    
-    /* Large mobile: Allow up to 4 columns */
-    @media (min-width: 480px) and (max-width: 767px) {
-        .interests-grid {
-            grid-template-columns: repeat(4, 1fr);
-        }
+        /* Force exactly 4 columns for single horizontal row on all mobile sizes */
+        grid-template-columns: repeat(4, 1fr);
+        gap: clamp(0.3rem, 1.2vw, 0.5rem);
+        width: 100%;
     }
 
     .interest-item {
-        padding: 0.5rem;
+        padding: clamp(0.5rem, 1.5vw, 0.7rem) clamp(0.3rem, 1vw, 0.5rem);
+        min-height: 60px;
+        border-radius: 8px;
     }
 
     .interest-item i {
-        font-size: 1.1rem;
+        font-size: clamp(1rem, 3vw, 1.2rem);
     }
 
     .interest-item span {
-        font-size: 0.7rem;
+        font-size: clamp(0.65rem, 2vw, 0.75rem);
+        line-height: 1.1;
     }
 
     .text-content {
@@ -353,6 +350,13 @@
     .personal-info dd {
         font-size: 0.9rem;
         text-align: justify;
+    }
+
+    /* Mobile Resume Button Container */
+    .about-resume-btn-container {
+        width: 100%;
+        padding: 0 1rem;
+        margin: 1.5rem 0;
     }
 
     /* -------------------- Mobile Skills Section -------------------- */
@@ -560,7 +564,7 @@
         height: 420px;
         right: -8%;
         top: -10%;
-        filter: blur(60px);
+        filter: blur(30px);
     }
 
     .hero-left {
@@ -940,7 +944,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: all 0.3s ease;
+        transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
     }
     
     .cert-nav-btn:hover:not(:disabled) {
