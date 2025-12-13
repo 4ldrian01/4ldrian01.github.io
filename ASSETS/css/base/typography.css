@@ -5,7 +5,7 @@
 /* Base Typography Settings */
 body {
     font-size: clamp(1rem, 1.6vw, 1.0625rem);
-    line-height: 1.65;
+    line-height: 1.6;
 }
 
 /* Headings */
@@ -56,10 +56,10 @@ h6 {
 
 /* Paragraphs */
 p {
-    margin-bottom: 1.125rem;
-    line-height: 1.75;
+    margin-bottom: clamp(1.125rem, 2vw, 1.5rem);
+    line-height: 1.65;
     font-size: clamp(1rem, 1.6vw, 1.0625rem);
-    max-width: 75ch;
+    max-width: 70ch;
 }
 
 /* Links */
@@ -75,6 +75,16 @@ a:hover {
 a:focus-visible {
     outline: 3px solid var(--secondary-accent, var(--primary-color));
     outline-offset: 3px;
+}
+
+/* Lists */
+ul, ol {
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+}
+
+li {
+    margin-bottom: 0.5rem;
 }
 
 /* Text Utilities */
@@ -155,7 +165,8 @@ a:focus-visible {
     text-align: center;
     display: inline-block;
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: clamp(2rem, 3.5vw, 3rem);
+    letter-spacing: -0.02em;
 }
 
 .section-title::after {

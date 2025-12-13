@@ -45,19 +45,17 @@ switch ($Mode) {
         if ($LASTEXITCODE -eq 0) {
             Write-Host "`n✅ Build completed successfully!" -ForegroundColor Green
             Write-Host "`nNext step: Run './deploy.ps1 prod' to switch to production mode" -ForegroundColor Cyan
-        } else {
+        }
+        else {
             Write-Host "`n❌ Build failed!" -ForegroundColor Red
         }
     }
-    
     'dev' {
         Update-IndexHTML -From "./dist/js/" -To "./ASSETS/js/" -ModeName "DEVELOPMENT"
         Write-Host "`n💻 Development mode active" -ForegroundColor Green
         Write-Host "   Using readable source code from ASSETS/js/" -ForegroundColor Gray
     }
-    
     'prod' {
-        # First check if dist folder exists
         if (-not (Test-Path "dist/js")) {
             Write-Host "❌ Error: dist/js/ folder not found!" -ForegroundColor Red
             Write-Host "   Run './deploy.ps1 build' first to create obfuscated code" -ForegroundColor Yellow
