@@ -6,20 +6,34 @@
     background: var(--section-background);
     padding: 24px 0;
     text-align: center;
-    border-top: 1px solid rgba(255, 68, 68, 0.1);
+    border-top: 1px solid transparent;
     position: relative;
+}
+
+/* Red divider line at top of footer */
+.copyright::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--primary-color), transparent);
 }
 
 .copyright p {
     color: var(--text-secondary);
     font-size: 0.9rem;
-    margin: 0;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
     flex-wrap: wrap;
     line-height: 1.6;
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
 }
 
 .copyright span {

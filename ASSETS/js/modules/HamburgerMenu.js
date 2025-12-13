@@ -23,14 +23,12 @@ export class HamburgerMenu {
     }
 
     setupEventListeners() {
-        // Toggle button click - instant response
         this.toggle.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
             this.toggleMenu();
         });
 
-        // Close button click - FIXED: direct event with stopPropagation
         if (this.closeBtn) {
             this.closeBtn.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -39,10 +37,31 @@ export class HamburgerMenu {
             });
         }
 
-        // Close on outside click (click on overlay)
+        // Close when clicking overlay background
         this.mobileMenu.addEventListener('click', (e) => {
-            // Only close if clicking directly on the overlay (not the container)
             if (e.target === this.mobileMenu) {
+                e.preventDefault();
+                this.closeMenu();
+            }
+        });
+
+        this.menuContainer.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        /**
+         * Half-height menu click-to-close handler
+         * Closes menu when clicking page content exposed below menu container
+         * Mobile: 55vh container, Tablet: 50vh container
+         */
+        document.addEventListener('click', (e) => {
+            if (!this.mobileMenu.classList.contains('active')) return;
+            
+            const isClickInsideMenu = this.menuContainer.contains(e.target);
+            const isClickOnToggle = this.toggle.contains(e.target);
+            const isClickOnCloseBtn = this.closeBtn && this.closeBtn.contains(e.target);
+            
+            if (!isClickInsideMenu && !isClickOnToggle && !isClickOnCloseBtn) {
                 this.closeMenu();
             }
         });
@@ -80,18 +99,13 @@ export class HamburgerMenu {
             }
         });
 
-        // Close on menu link click with immediate visual feedback
         this.menuLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                // Don't manipulate active class here - let ScrollManager handle it
-                // Just close the menu after a brief delay for smooth transition
-                setTimeout(() => {
-                    this.closeMenu();
-                }, 100);
+            link.addEventListener('click', () => {
+                setTimeout(() => this.closeMenu(), 100);
             });
         });
 
-        // Close on window resize (if switching to desktop)
+        // Close on window resize when switching to desktop
         let resizeTimer;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimer);
@@ -103,7 +117,7 @@ export class HamburgerMenu {
         });
     }
 
-    // Arrow key navigation helpers
+    // Keyboard navigation
     focusNextLink() {
         this.currentFocusIndex = (this.currentFocusIndex + 1) % this.menuLinks.length;
         this.menuLinks[this.currentFocusIndex].focus();
@@ -126,7 +140,6 @@ export class HamburgerMenu {
         this.menuLinks[this.currentFocusIndex].focus();
     }
 
-    // Focus trap for Tab key
     handleTabKey(e) {
         const focusableElements = this.menuContainer.querySelectorAll(
             'button, a[href], [tabindex]:not([tabindex="-1"])'
@@ -156,17 +169,12 @@ export class HamburgerMenu {
         this.toggle.setAttribute('aria-expanded', String(nextState));
         this.mobileMenu.classList.toggle('active', nextState);
         
-        // Body scroll lock for better UX
+        // Background remains scrollable (no body scroll lock)
         if (nextState) {
-            document.body.style.overflow = 'hidden';
             document.body.classList.add('menu-open');
-            // Focus first menu link when opening
             this.currentFocusIndex = 0;
-            setTimeout(() => {
-                this.menuLinks[0]?.focus();
-            }, 200); // Wait for animation
+            setTimeout(() => this.menuLinks[0]?.focus(), 200);
         } else {
-            document.body.style.overflow = '';
             document.body.classList.remove('menu-open');
             this.currentFocusIndex = -1;
         }
@@ -177,9 +185,6 @@ export class HamburgerMenu {
 
         this.toggle.setAttribute('aria-expanded', 'false');
         this.mobileMenu.classList.remove('active');
-        
-        // Remove body scroll lock
-        document.body.style.overflow = '';
         document.body.classList.remove('menu-open');
         this.currentFocusIndex = -1;
     }

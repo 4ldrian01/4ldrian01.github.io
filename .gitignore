@@ -19,11 +19,25 @@ desktop.ini
 .settings/
 
 # Ignore deployment and configuration files used only locally
+deploy.ps1
 DEPLOYMENT_CHECKLIST.md
 
 # Documentation files (useful only for local development)
 *.md
 !README.md
+!.github/copilot-instructions.md
+
+# Specific documentation files to ignore
+CODE-PROTECTION-GUIDE.md
+DEPLOY-COMMANDS.md
+DEPLOYMENT_CHECKLIST.md
+PERFORMANCE-OPTIMIZATION-GUIDE.md
+PRE-COMMIT-AUDIT.md
+PROTECTION-COMPARISON.md
+QUICK-START.md
+REFACTOR-SUMMARY.md
+STYLE-FIXES-SUMMARY.md
+TESTING-CHECKLIST.md
 
 # Local test and documentation files (in ASSETS/documents/)
 ASSETS/documents/create_placeholders.ps1

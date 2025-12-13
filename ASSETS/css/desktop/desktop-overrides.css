@@ -130,6 +130,14 @@
     /* Skills Section */
     #skills {
         padding: 80px 8%;
+        overflow: visible !important;
+    }
+    
+    /* CRITICAL: Ensure divider is visible on desktop */
+    #skills::after {
+        display: block !important;
+        opacity: 1 !important;
+        z-index: 100 !important;
     }
 
     .skills-grid {

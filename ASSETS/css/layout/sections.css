@@ -4,7 +4,7 @@
 
 /* Base Section Styles */
 section {
-    padding: 100px 8%;
+    padding: clamp(4rem, 8vh, 7rem) clamp(1.25rem, 8%, 8rem);
     position: relative;
     overflow: hidden;
     transform: translateZ(0);
@@ -21,14 +21,22 @@ section:nth-of-type(even) {
     background: var(--section-background);
 }
 
-section:not(#contact)::after {
+section::after {
     content: "";
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 1px;
-    background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+    background: linear-gradient(to right, transparent 0%, var(--primary-color) 50%, transparent 100%);
+    z-index: 10;
+    opacity: 1;
+    pointer-events: none;
+}
+
+/* Remove divider only from contact section (footer has its own border) */
+#contact::after {
+    display: none !important;
 }
 
 /* -------------------- Stats Section -------------------- */
@@ -74,7 +82,7 @@ section:not(#contact)::after {
 
 /* -------------------- About Section -------------------- */
 #about {
-    padding: 100px 8%;
+    padding: clamp(4rem, 8vh, 7rem) clamp(1.25rem, 8%, 8rem);
     position: relative;
     overflow: hidden;
     background: var(--background-color);
@@ -394,6 +402,25 @@ section:not(#contact)::after {
     background: var(--section-background);
     position: relative;
     overflow: visible;
+}
+
+/**
+ * Section Dividers Z-Index Hierarchy
+ * Universal: z-index: 10 (base level)
+ * #skills::after: z-index: 100 (highest priority - prevents desktop overflow issues)
+ * Desktop: Explicit overflow: visible ensures divider renders above all content
+ */
+#skills::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent 0%, var(--primary-color) 50%, transparent 100%);
+    z-index: 100 !important;
+    opacity: 1 !important;
+    display: block !important;
 }
 
 #skills::before {
